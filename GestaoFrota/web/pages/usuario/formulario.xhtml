@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="content">
+        <h:form>
+            Id: <h:inputText id="id" value="#{veiculoController.veiculo.id}" disabled="true" /><br />
+            Marca: <h:inputText id="marca" value="#{veiculoController.veiculo.marca}" /><br />
+            Modelo: <h:inputText id="modelo" value="#{veiculoController.veiculo.modelo}" /><br />
+            Ano: <h:inputText id="ano" value="#{veiculoController.veiculo.ano}" /><br />
+            Placa: <h:inputText id="plana" value="#{veiculoController.veiculo.placa}" /><br />
+            Disponível: <h:selectBooleanCheckbox id="discponivel" value="#{veiculoController.veiculo.disponivel}" /><br />
+            <h:commandButton value="Salvar" action="#{veiculoController.salvar()}" />
+        </h:form>
+    </ui:define>
+
+</ui:composition>
