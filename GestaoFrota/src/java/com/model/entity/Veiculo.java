@@ -5,11 +5,10 @@
 package com.model.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -17,24 +16,32 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "veiculo")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Veiculo.findAll", query = "SELECT v FROM Veiculo v"),
     @NamedQuery(name = "Veiculo.findById", query = "SELECT v FROM Veiculo v WHERE v.id = :id"),
+    @NamedQuery(name = "Veiculo.findByPlaca", query = "SELECT v FROM Veiculo v WHERE v.placa = :placa"),
+    @NamedQuery(name = "Veiculo.findByRenavam", query = "SELECT v FROM Veiculo v WHERE v.renavam = :renavam"),
     @NamedQuery(name = "Veiculo.findByMarca", query = "SELECT v FROM Veiculo v WHERE v.marca = :marca"),
     @NamedQuery(name = "Veiculo.findByModelo", query = "SELECT v FROM Veiculo v WHERE v.modelo = :modelo"),
+    @NamedQuery(name = "Veiculo.findByCor", query = "SELECT v FROM Veiculo v WHERE v.cor = :cor"),
     @NamedQuery(name = "Veiculo.findByAno", query = "SELECT v FROM Veiculo v WHERE v.ano = :ano"),
-    @NamedQuery(name = "Veiculo.findByPlaca", query = "SELECT v FROM Veiculo v WHERE v.placa = :placa"),
-    @NamedQuery(name = "Veiculo.findByDisponivel", query = "SELECT v FROM Veiculo v WHERE v.disponivel = :disponivel")})
+    @NamedQuery(name = "Veiculo.findByCapacidadePassageiros", query = "SELECT v FROM Veiculo v WHERE v.capacidadePassageiros = :capacidadePassageiros"),
+    @NamedQuery(name = "Veiculo.findByCapacidadeCarga", query = "SELECT v FROM Veiculo v WHERE v.capacidadeCarga = :capacidadeCarga")})
 public class Veiculo implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    
     private Integer id;
+    private String placa;
+    private String renavam;
     private String marca;
     private String modelo;
+    private String cor;
     private String ano;
-    private String placa;
-    private boolean disponivel;
+    private int capacidadePassageiros;
+    private int capacidadeCarga;
+    private List<OpcionaisVeiculo> opcionaisVeiculo;
+    private TipoVeiculo tipoVeiculo;
 
     public Veiculo() {
     }
@@ -43,13 +50,16 @@ public class Veiculo implements Serializable {
         this.id = id;
     }
 
-    public Veiculo(Integer id, String marca, String modelo, String ano, String placa, boolean disponivel) {
+    public Veiculo(Integer id, String placa, String renavam, String marca, String modelo, String cor, String ano, int capacidadePassageiros, int capacidadeCarga) {
         this.id = id;
+        this.placa = placa;
+        this.renavam = renavam;
         this.marca = marca;
         this.modelo = modelo;
+        this.cor = cor;
         this.ano = ano;
-        this.placa = placa;
-        this.disponivel = disponivel;
+        this.capacidadePassageiros = capacidadePassageiros;
+        this.capacidadeCarga = capacidadeCarga;
     }
 
     @Id
@@ -63,6 +73,30 @@ public class Veiculo implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 7)
+    @Column(name = "placa")
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "renavam")
+    public String getRenavam() {
+        return renavam;
+    }
+
+    public void setRenavam(String renavam) {
+        this.renavam = renavam;
     }
 
     @Basic(optional = false)
@@ -91,6 +125,18 @@ public class Veiculo implements Serializable {
 
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "cor")
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 4)
     @Column(name = "ano")
     public String getAno() {
@@ -103,25 +149,43 @@ public class Veiculo implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "placa")
-    public String getPlaca() {
-        return placa;
+    @Column(name = "capacidade_passageiros")
+    public int getCapacidadePassageiros() {
+        return capacidadePassageiros;
     }
 
-    public void setPlaca(String placa) {
-        this.placa = placa;
+    public void setCapacidadePassageiros(int capacidadePassageiros) {
+        this.capacidadePassageiros = capacidadePassageiros;
     }
 
     @Basic(optional = false)
     @NotNull
-    @Column(name = "disponivel")
-    public boolean getDisponivel() {
-        return disponivel;
+    @Column(name = "capacidade_carga")
+    public int getCapacidadeCarga() {
+        return capacidadeCarga;
     }
 
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
+    public void setCapacidadeCarga(int capacidadeCarga) {
+        this.capacidadeCarga = capacidadeCarga;
+    }
+
+    @OneToMany(mappedBy = "veiculo")
+    public List<OpcionaisVeiculo> getOpcionaisVeiculo() {
+        return opcionaisVeiculo;
+    }
+
+    public void setOpcionaisVeiculo(List<OpcionaisVeiculo> opcionaisVeiculo) {
+        this.opcionaisVeiculo = opcionaisVeiculo;
+    }
+
+    @JoinColumn(name = "tipo_veiculo", referencedColumnName = "id")
+    @ManyToOne
+    public TipoVeiculo getTipoVeiculo() {
+        return tipoVeiculo;
+    }
+
+    public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
+        this.tipoVeiculo = tipoVeiculo;
     }
 
     @Override

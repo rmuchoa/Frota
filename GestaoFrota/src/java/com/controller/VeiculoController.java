@@ -4,7 +4,9 @@
  */
 package com.controller;
 
+import com.model.dao.TipoVeiculoDao;
 import com.model.dao.VeiculoDao;
+import com.model.entity.TipoVeiculo;
 import com.model.entity.Veiculo;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -24,12 +26,16 @@ public class VeiculoController {
     
     @EJB
     private VeiculoDao dao;
+    @EJB
+    private TipoVeiculoDao tipoDao;
     
     @ManagedProperty(name="id", value="#{param.id}")
     private Integer id;
     
     private Veiculo veiculo;
     private List<Veiculo> veiculos;
+    private List<TipoVeiculo> tipos;
+    private TipoVeiculo tipoSelecionado;
     
     public VeiculoController() {
         this.veiculo = new Veiculo();
@@ -61,6 +67,7 @@ public class VeiculoController {
     @PostConstruct
     public void listar() {
         this.veiculos = dao.listar();
+        this.tipos = tipoDao.listar();
     }
 
     /**
@@ -103,6 +110,34 @@ public class VeiculoController {
      */
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    /**
+     * @return the tipos
+     */
+    public List<TipoVeiculo> getTipos() {
+        return tipos;
+    }
+
+    /**
+     * @param tipos the tipos to set
+     */
+    public void setTipos(List<TipoVeiculo> tipos) {
+        this.tipos = tipos;
+    }
+
+    /**
+     * @return the tipoSelecionado
+     */
+    public TipoVeiculo getTipoSelecionado() {
+        return tipoSelecionado;
+    }
+
+    /**
+     * @param tipoSelecionado the tipoSelecionado to set
+     */
+    public void setTipoSelecionado(TipoVeiculo tipoSelecionado) {
+        this.tipoSelecionado = tipoSelecionado;
     }
     
 }

@@ -18,7 +18,7 @@ import javax.persistence.Query;
 @Stateless
 public class VeiculoDaoBean implements VeiculoDao {
 
-    @PersistenceContext(unitName="TreinamentoPU")
+    @PersistenceContext(unitName="FrotaPU")
     private EntityManager em;
     
     @Override
@@ -33,6 +33,7 @@ public class VeiculoDaoBean implements VeiculoDao {
 
     @Override
     public void remover(Veiculo veiculo) {
+        veiculo = em.merge(veiculo);
         em.remove(veiculo);
     }
 

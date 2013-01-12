@@ -17,6 +17,14 @@
                     <h:outputText value="#{veiculo.id}" />
                 </h:column>
                 <h:column>
+                    <f:facet name="header"><h:outputText value="Placa" /></f:facet>
+                    <h:outputText value="#{veiculo.placa}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText value="Renavam" /></f:facet>
+                    <h:outputText value="#{veiculo.renavam}" />
+                </h:column>
+                <h:column>
                     <f:facet name="header"><h:outputText value="Marca" /></f:facet>
                     <h:outputText value="#{veiculo.marca}" />
                 </h:column>
@@ -25,17 +33,29 @@
                     <h:outputText value="#{veiculo.modelo}" />
                 </h:column>
                 <h:column>
+                    <f:facet name="header"><h:outputText value="Cor" /></f:facet>
+                    <h:outputText value="#{veiculo.cor}" />
+                </h:column>
+                <h:column>
                     <f:facet name="header"><h:outputText value="Ano" /></f:facet>
                     <h:outputText value="#{veiculo.ano}" />
                 </h:column>
                 <h:column>
-                    <f:facet name="header"><h:outputText value="Placa" /></f:facet>
-                    <h:outputText value="#{veiculo.placa}" />
+                    <f:facet name="header"><h:outputText value="Tipo" /></f:facet>
+                    <h:outputText value="#{veiculo.tipoVeiculo.descricao}" />
                 </h:column>
                 <h:column>
-                    <f:facet name="header"><h:outputText value="Disponivel" /></f:facet>
-                    <h:selectBooleanCheckbox value="#{veiculo.disponivel}" disabled="true" />
+                    <f:facet name="header"><h:outputText value="Passageiros" /></f:facet>
+                    <h:outputText value="#{veiculo.capacidadePassageiros}" />
                 </h:column>
+                <h:column>
+                    <f:facet name="header"><h:outputText value="Carga" /></f:facet>
+                    <h:outputText value="#{veiculo.capacidadeCarga}" />
+                </h:column>
+            <!--<h:column>
+                    <f:facet name="header"><h:outputText value="Disponivel" /></f:facet>
+                    <h:selectBooleanCheckbox value="" disabled="true" />
+                </h:column>-->
                 <h:column>
                     <f:facet name="header"><h:outputText value="Comandos" /></f:facet>
                     <h:commandButton value="edit" action="#{veiculoController.editar()}">
