@@ -4,17 +4,20 @@
  */
 package com.controller;
 
-import com.model.dao.TipoVeiculoDao;
+import com.model.dao.OpcionaisVeiculoDao;
 import com.model.dao.VeiculoDao;
+import com.model.entity.OpcionaisVeiculo;
 import com.model.entity.TipoVeiculo;
 import com.model.entity.Veiculo;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 
 /**
  *
@@ -27,21 +30,24 @@ public class VeiculoController {
     @EJB
     private VeiculoDao dao;
     @EJB
-    private TipoVeiculoDao tipoDao;
+    private OpcionaisVeiculoDao opcionaisDao;
     
     @ManagedProperty(name="id", value="#{param.id}")
     private Integer id;
     
     private Veiculo veiculo;
     private List<Veiculo> veiculos;
-    private List<TipoVeiculo> tipos;
+    
     private TipoVeiculo tipoSelecionado;
+    private Map<Integer,Boolean> checked;
     
     public VeiculoController() {
         this.veiculo = new Veiculo();
     }
     
     public String salvar() {
+        veiculo.setTipoVeiculo(tipoSelecionado);
+        relacionarOpcionais();
         if(veiculo.getId() == null) {
             dao.inserir(veiculo);
             this.veiculos = dao.listar();
@@ -67,7 +73,39 @@ public class VeiculoController {
     @PostConstruct
     public void listar() {
         this.veiculos = dao.listar();
-        this.tipos = tipoDao.listar();
+        if (checked == null || checked.isEmpty()) {
+            this.checked = this.getCheckedList();
+        }
+    }
+    
+    public Map<Integer,Boolean> getCheckedList() {
+        Map<Integer,Boolean> checkedList = new HashMap<Integer,Boolean>();
+        List<OpcionaisVeiculo> opcionais = opcionaisDao.listar();
+        for (OpcionaisVeiculo opcional : opcionais) {
+            boolean flag = false;
+            if (veiculo.getOpcionaisVeiculo() != null) {
+                for (OpcionaisVeiculo opcionalVeiculo : veiculo.getOpcionaisVeiculo()) {
+                    if(opcional.getId() == opcionalVeiculo.getId()) {
+                        checkedList.put(opcional.getId(), Boolean.TRUE);
+                        flag = true;
+                    }
+                }
+            }
+            if(flag == false) {
+                checkedList.put(opcional.getId(), Boolean.FALSE);
+            }
+        }
+        return checkedList;
+    }
+    
+    public void relacionarOpcionais() {
+        List<OpcionaisVeiculo> opcionais = opcionaisDao.listar();
+        for (OpcionaisVeiculo opcional : opcionais) {
+            if (checked.get(opcional.getId())) {
+                veiculo.setOpcionaisVeiculo(new ArrayList<OpcionaisVeiculo>());
+                veiculo.getOpcionaisVeiculo().add(opcional);
+            }
+        }
     }
 
     /**
@@ -113,20 +151,6 @@ public class VeiculoController {
     }
 
     /**
-     * @return the tipos
-     */
-    public List<TipoVeiculo> getTipos() {
-        return tipos;
-    }
-
-    /**
-     * @param tipos the tipos to set
-     */
-    public void setTipos(List<TipoVeiculo> tipos) {
-        this.tipos = tipos;
-    }
-
-    /**
      * @return the tipoSelecionado
      */
     public TipoVeiculo getTipoSelecionado() {
@@ -138,6 +162,20 @@ public class VeiculoController {
      */
     public void setTipoSelecionado(TipoVeiculo tipoSelecionado) {
         this.tipoSelecionado = tipoSelecionado;
+    }
+
+    /**
+     * @return the checked
+     */
+    public Map<Integer,Boolean> getChecked() {
+        return checked;
+    }
+
+    /**
+     * @param checked the checked to set
+     */
+    public void setChecked(Map<Integer,Boolean> checked) {
+        this.checked = checked;
     }
     
 }

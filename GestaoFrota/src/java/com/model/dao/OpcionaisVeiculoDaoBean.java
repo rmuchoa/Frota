@@ -4,7 +4,7 @@
  */
 package com.model.dao;
 
-import com.model.entity.TipoVeiculo;
+import com.model.entity.OpcionaisVeiculo;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,22 +16,17 @@ import javax.persistence.Query;
  * @author renanmarceluchoa
  */
 @Stateless
-public class TipoVeiculoDaoBean implements TipoVeiculoDao {
+public class OpcionaisVeiculoDaoBean implements OpcionaisVeiculoDao {
 
     @PersistenceContext(unitName = "FrotaPU")
     private EntityManager em;
-
-    @Override
-    public TipoVeiculo buscarPorDescricao(String descricao) {
-        Query query = em.createNamedQuery("TipoVeiculo.findByDescricao");
-        query.setParameter("descricao", descricao);
-        return (TipoVeiculo) query.getSingleResult();
-    }
     
     @Override
-    public List<TipoVeiculo> listar() {
-        Query query = em.createNamedQuery("TipoVeiculo.findAll");
+    public List<OpcionaisVeiculo> listar() {
+        Query query = em.createNamedQuery("OpcionaisVeiculo.findAll");
         return query.getResultList();
     }
+
+    
     
 }

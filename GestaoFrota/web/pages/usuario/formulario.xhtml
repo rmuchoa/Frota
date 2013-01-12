@@ -17,9 +17,14 @@
             Tipo:<h:selectOneMenu id="tipo" 
                                   value="#{veiculoController.tipoSelecionado}" 
                                   converter="TipoVeiculoConverter">
-                <f:selectItems value="#{veiculoController.veiculos}" />
+                <f:selectItems value="#{tipoVeiculoController.tipos}" var="tipo" itemLabel="#{tipo.descricao}" />
             </h:selectOneMenu>
-<!--            Disponível: <h:selectBooleanCheckbox id="discponivel" value="" /><br />-->
+            Capacidade de Passageiros: <h:inputText id="passageiros" value="#{veiculoController.veiculo.capacidadePassageiros}" /><br />
+            Capacidade de Carga: <h:inputText id="carga" value="#{veiculoController.veiculo.capacidadeCarga}" /><br />
+            <ui:repeat value="#{opcionaisVeiculoController.opcionais}" var="opcional" varStatus="i" >
+                #{opcional.descricao}: <h:selectBooleanCheckbox  value="#{veiculoController.checked[opcional.id]}" />
+            </ui:repeat>
+<!--                        Disponível: <h:selectBooleanCheckbox id="discponivel" value="" /><br />-->
             <h:commandButton value="Salvar" action="#{veiculoController.salvar()}" />
         </h:form>
     </ui:define>

@@ -25,7 +25,6 @@ public class TipoVeiculo implements Serializable {
     
     private Integer id;
     private String descricao;
-    private Veiculo veiculo;
 
     public TipoVeiculo() {
     }

@@ -169,7 +169,7 @@ public class Veiculo implements Serializable {
         this.capacidadeCarga = capacidadeCarga;
     }
 
-    @OneToMany(mappedBy = "veiculo")
+    @ManyToMany(mappedBy = "veiculos")
     public List<OpcionaisVeiculo> getOpcionaisVeiculo() {
         return opcionaisVeiculo;
     }

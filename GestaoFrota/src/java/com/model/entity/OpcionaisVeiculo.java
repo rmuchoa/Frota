@@ -5,6 +5,7 @@
 package com.model.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -14,7 +15,7 @@ import javax.validation.constraints.Size;
  * @author renanmarceluchoa
  */
 @Entity
-@Table(name = "opcionais_veiculo")
+@Table(name = "opcionais")
 @NamedQueries({
     @NamedQuery(name = "OpcionaisVeiculo.findAll", query = "SELECT o FROM OpcionaisVeiculo o"),
     @NamedQuery(name = "OpcionaisVeiculo.findById", query = "SELECT o FROM OpcionaisVeiculo o WHERE o.id = :id"),
@@ -25,7 +26,7 @@ public class OpcionaisVeiculo implements Serializable {
     
     private Integer id;
     private String descricao;
-    private Veiculo veiculo;
+    private List<Veiculo> veiculos;
 
     public OpcionaisVeiculo() {
     }
@@ -64,14 +65,16 @@ public class OpcionaisVeiculo implements Serializable {
         this.descricao = descricao;
     }
 
-    @JoinColumn(name = "veiculo", referencedColumnName = "id")
-    @ManyToOne
-    public Veiculo getVeiculo() {
-        return veiculo;
+    @ManyToMany
+    @JoinTable(name="veiculo_opcionais",
+             joinColumns={@JoinColumn(name = "veiculo_id")},
+             inverseJoinColumns={@JoinColumn(name = "opcional_id")})
+    public List<Veiculo> getVeiculos() {
+        return veiculos;
     }
 
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
+    public void setVeiculos(List<Veiculo> veiculos) {
+        this.veiculos = veiculos;
     }
 
     @Override

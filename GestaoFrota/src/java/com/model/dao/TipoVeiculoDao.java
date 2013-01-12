@@ -15,6 +15,7 @@ import javax.ejb.Local;
 @Local
 public interface TipoVeiculoDao {
     
+    public TipoVeiculo buscarPorDescricao(String descricao);
     public List<TipoVeiculo> listar();
     
 }
