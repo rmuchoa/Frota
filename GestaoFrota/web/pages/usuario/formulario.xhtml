@@ -7,26 +7,28 @@
 
     <ui:define name="conteudo">
         <h:form>
-            Id: <h:inputText id="id" value="#{veiculoController.veiculo.id}" disabled="true" /><br />
-            Placa: <h:inputText id="placa" value="#{veiculoController.veiculo.placa}" /><br />
-            Renavam: <h:inputText id="renavam" value="#{veiculoController.veiculo.renavam}" /><br />
-            Marca: <h:inputText id="marca" value="#{veiculoController.veiculo.marca}" /><br />
-            Modelo: <h:inputText id="modelo" value="#{veiculoController.veiculo.modelo}" /><br />
-            Cor: <h:inputText id="cor" value="#{veiculoController.veiculo.cor}" /><br />
-            Ano: <h:inputText id="ano" value="#{veiculoController.veiculo.ano}" /><br />
-            Tipo:<h:selectOneMenu id="tipo" 
+            <fieldset>
+            <label>Id:</label> <h:inputText id="id" value="#{veiculoController.veiculo.id}" disabled="true" /><br />
+             <label>Placa:</label> <h:inputText id="placa" value="#{veiculoController.veiculo.placa}" /><br />
+             <label>Renavam:</label> <h:inputText id="renavam" value="#{veiculoController.veiculo.renavam}" /><br />
+             <label>Marca:</label> <h:inputText id="marca" value="#{veiculoController.veiculo.marca}" /><br />
+             <label>Modelo:</label> <h:inputText id="modelo" value="#{veiculoController.veiculo.modelo}" /><br />
+             <label>Cor:</label> <h:inputText id="cor" value="#{veiculoController.veiculo.cor}" /><br />
+             <label>Ano:</label> <h:inputText id="ano" value="#{veiculoController.veiculo.ano}" /><br />
+             <label>Tipo:</label><h:selectOneMenu id="tipo" 
                                   value="#{veiculoController.tipoSelecionado}" 
                                   converter="TipoVeiculoConverter">
                 <f:selectItems value="#{tipoVeiculoController.tipos}" var="tipo" itemLabel="#{tipo.descricao}" />
             </h:selectOneMenu>
-            Capacidade de Passageiros: <h:inputText id="passageiros" value="#{veiculoController.veiculo.capacidadePassageiros}" /><br />
-            Capacidade de Carga: <h:inputText id="carga" value="#{veiculoController.veiculo.capacidadeCarga}" /><br />
+            <label> Capacidade de Passageiros:</label> <h:inputText id="passageiros" value="#{veiculoController.veiculo.capacidadePassageiros}" /><br />
+             <label>Capacidade de Carga:</label> <h:inputText id="carga" value="#{veiculoController.veiculo.capacidadeCarga}" /><br />
             <ui:repeat value="#{opcionaisVeiculoController.opcionais}" var="opcional" varStatus="i" >
                 #{opcional.descricao}: <h:selectBooleanCheckbox  value="#{veiculoController.checked[opcional.id]}" />
             </ui:repeat>
 <!--                        Disponível: <h:selectBooleanCheckbox id="discponivel" value="" /><br />-->
             <h:commandButton value="Salvar" action="#{veiculoController.salvar()}" />
-        </h:form>
+            </fieldset>
+      </h:form>
     </ui:define>
 
 </ui:composition>
