@@ -39,7 +39,7 @@ public class VeiculoController implements Serializable {
     private List<Veiculo> veiculos;
     
     @ManagedProperty(name="id", value="#{param.id}")
-    private String id;
+    private Integer id;
     
     private TipoVeiculo tipoSelecionado;
     private Map<Integer,Boolean> checked;
@@ -62,15 +62,17 @@ public class VeiculoController implements Serializable {
     }
     
     public String editar() {
-        //this.setVeiculo(getSelectedVeiculo());
-        
-        System.out.println("Id:"+id);
+        veiculo = dao.buscar(id);
+        System.out.println("Veiculo:"+id);
+        System.out.println("Veiculo:"+veiculo.getId());
         return "formulario";
     }
     
     public String deletar() {
-        //this.setVeiculo(getSelectedVeiculo());
+        veiculo = dao.buscar(id);
         dao.remover(veiculo);
+        System.out.println("Veiculo:"+id);
+        System.out.println("Veiculo:"+veiculo.getId());
         this.veiculos = dao.listar();
         return "listaVeiculo";
     }
@@ -158,14 +160,14 @@ public class VeiculoController implements Serializable {
     /**
      * @return the veiculoSelected
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
     /**
      * @param veiculoSelected the veiculoSelected to set
      */
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

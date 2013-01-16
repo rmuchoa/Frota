@@ -35,7 +35,7 @@ public class Veiculo implements Serializable {
     
     private Integer id;
     private String placa;
-    private String renavam;
+    private Long renavam;
     private String marca;
     private String modelo;
     private String cor;
@@ -52,7 +52,7 @@ public class Veiculo implements Serializable {
         this.id = id;
     }
 
-    public Veiculo(Integer id, String placa, String renavam, String marca, String modelo, String cor, String ano, int capacidadePassageiros, int capacidadeCarga) {
+    public Veiculo(Integer id, String placa, Long renavam, String marca, String modelo, String cor, String ano, int capacidadePassageiros, int capacidadeCarga) {
         this.id = id;
         this.placa = placa;
         this.renavam = renavam;
@@ -91,13 +91,13 @@ public class Veiculo implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 9)
     @Column(name = "renavam")
-    public String getRenavam() {
+    public Long getRenavam() {
         return renavam;
     }
 
-    public void setRenavam(String renavam) {
+    public void setRenavam(Long renavam) {
         this.renavam = renavam;
     }
 
