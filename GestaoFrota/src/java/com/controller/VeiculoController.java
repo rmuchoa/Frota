@@ -62,22 +62,13 @@ public class VeiculoController implements Serializable {
     }
     
     public String editar() {
-        for (Veiculo v : veiculos) {
-            if (v.getId() == id) {
-                System.out.println("v"+v.getId()+": " + v);
-                this.veiculo = v;
-            }
-        }
-        System.out.println("Veiculo:"+id);
-        System.out.println("Veiculo:"+veiculo.getId());
+        this.veiculo = dao.buscar(id);
         return "formulario";
     }
     
     public String deletar() {
         veiculo = dao.buscar(id);
         dao.remover(veiculo);
-        System.out.println("Veiculo:"+id);
-        System.out.println("Veiculo:"+veiculo.getId());
         this.veiculos = dao.listar();
         return "listaVeiculo";
     }
