@@ -8,7 +8,7 @@
     <ui:define name="conteudo">
         <h:form class="form-horizontal">
             <fieldset>
-                <div class="control-group"><label>Id:</label> <h:inputText id="id" value="#{veiculoController.veiculo.id}" disabled="true" /></div>
+                <h:inputHidden id="id" value="#{veiculoController.veiculo.id}" />
                 <div class="control-group"><label>Placa:</label> <h:inputText id="placa" value="#{veiculoController.veiculo.placa}" /></div>
                 <div class="control-group"><label>Renavam:</label> <h:inputText id="renavam" value="#{veiculoController.veiculo.renavam}" /></div>
                 <div class="control-group"><label>Marca:</label> <h:inputText id="marca" value="#{veiculoController.veiculo.marca}" /></div>
