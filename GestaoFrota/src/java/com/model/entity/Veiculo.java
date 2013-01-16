@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
  *
  * @author renanmarceluchoa
  */
-@ManagedBean
 @Entity
 @Table(name = "veiculo")
 @NamedQueries({

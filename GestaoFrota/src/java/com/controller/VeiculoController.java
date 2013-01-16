@@ -45,7 +45,7 @@ public class VeiculoController implements Serializable {
     private Map<Integer,Boolean> checked;
     
     public VeiculoController() {
-        this.veiculo = new Veiculo();
+    
     }
     
     public String salvar() {
@@ -62,10 +62,10 @@ public class VeiculoController implements Serializable {
     }
     
     public String editar() {
-        for (Veiculo veiculo : veiculos) {
-            if (veiculo.getId() == id) {
-                System.out.println("v"+veiculo.getId()+": " + veiculo);
-                this.veiculo = veiculo;
+        for (Veiculo v : veiculos) {
+            if (v.getId() == id) {
+                System.out.println("v"+v.getId()+": " + v);
+                this.veiculo = v;
             }
         }
         System.out.println("Veiculo:"+id);
