@@ -9,6 +9,7 @@ import com.model.dao.VeiculoDao;
 import com.model.entity.OpcionaisVeiculo;
 import com.model.entity.TipoVeiculo;
 import com.model.entity.Veiculo;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -25,18 +28,18 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class VeiculoController {
+public class VeiculoController implements Serializable {
     
     @EJB
     private VeiculoDao dao;
     @EJB
     private OpcionaisVeiculoDao opcionaisDao;
     
-    @ManagedProperty(name="id", value="#{param.id}")
-    private Integer id;
-    
     private Veiculo veiculo;
     private List<Veiculo> veiculos;
+    
+    @ManagedProperty(name="id", value="#{param.id}")
+    private String id;
     
     private TipoVeiculo tipoSelecionado;
     private Map<Integer,Boolean> checked;
@@ -59,12 +62,14 @@ public class VeiculoController {
     }
     
     public String editar() {
-        this.veiculo = dao.buscar(id);
+        //this.setVeiculo(getSelectedVeiculo());
+        
+        System.out.println("Id:"+id);
         return "formulario";
     }
     
     public String deletar() {
-        this.veiculo = dao.buscar(id);
+        //this.setVeiculo(getSelectedVeiculo());
         dao.remover(veiculo);
         this.veiculos = dao.listar();
         return "listaVeiculo";
@@ -72,6 +77,8 @@ public class VeiculoController {
     
     @PostConstruct
     public void listar() {
+        this.veiculo = new Veiculo();
+        this.veiculo.setOpcionaisVeiculo(new ArrayList<OpcionaisVeiculo>());
         this.veiculos = dao.listar();
         if (checked == null || checked.isEmpty()) {
             this.checked = this.getCheckedList();
@@ -102,10 +109,15 @@ public class VeiculoController {
         List<OpcionaisVeiculo> opcionais = opcionaisDao.listar();
         for (OpcionaisVeiculo opcional : opcionais) {
             if (checked.get(opcional.getId())) {
-                veiculo.setOpcionaisVeiculo(new ArrayList<OpcionaisVeiculo>());
                 veiculo.getOpcionaisVeiculo().add(opcional);
             }
         }
+    }
+    
+    public Integer getParam() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        return Integer.getInteger(request.getParameter("id"));
     }
 
     /**
@@ -137,24 +149,24 @@ public class VeiculoController {
     }
 
     /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
      * @return the tipoSelecionado
      */
     public TipoVeiculo getTipoSelecionado() {
         return tipoSelecionado;
+    }
+
+    /**
+     * @return the veiculoSelected
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param veiculoSelected the veiculoSelected to set
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**

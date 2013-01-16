@@ -6,6 +6,7 @@ package com.model.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
  *
  * @author renanmarceluchoa
  */
+@ManagedBean
 @Entity
 @Table(name = "veiculo")
 @NamedQueries({
@@ -149,7 +151,7 @@ public class Veiculo implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Column(name = "capacidade_passageiros")
+    @Column(name = "capacidadepassageiros")
     public int getCapacidadePassageiros() {
         return capacidadePassageiros;
     }
@@ -160,7 +162,7 @@ public class Veiculo implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Column(name = "capacidade_carga")
+    @Column(name = "capacidadecarga")
     public int getCapacidadeCarga() {
         return capacidadeCarga;
     }
@@ -169,7 +171,10 @@ public class Veiculo implements Serializable {
         this.capacidadeCarga = capacidadeCarga;
     }
 
-    @ManyToMany(mappedBy = "veiculos")
+    @ManyToMany()
+    @JoinTable(name="veiculo_opcionaisveiculo",
+             joinColumns={@JoinColumn(name = "veiculo_id")},
+             inverseJoinColumns={@JoinColumn(name = "opcionaisveiculo_id")})
     public List<OpcionaisVeiculo> getOpcionaisVeiculo() {
         return opcionaisVeiculo;
     }
@@ -178,7 +183,7 @@ public class Veiculo implements Serializable {
         this.opcionaisVeiculo = opcionaisVeiculo;
     }
 
-    @JoinColumn(name = "tipo_veiculo", referencedColumnName = "id")
+    @JoinColumn(name = "id_tipoveiculo", referencedColumnName = "id")
     @ManyToOne
     public TipoVeiculo getTipoVeiculo() {
         return tipoVeiculo;

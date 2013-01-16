@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
  * @author renanmarceluchoa
  */
 @Entity
-@Table(name = "opcionais")
+@Table(name = "opcionaisveiculo")
 @NamedQueries({
     @NamedQuery(name = "OpcionaisVeiculo.findAll", query = "SELECT o FROM OpcionaisVeiculo o"),
     @NamedQuery(name = "OpcionaisVeiculo.findById", query = "SELECT o FROM OpcionaisVeiculo o WHERE o.id = :id"),
@@ -26,7 +26,6 @@ public class OpcionaisVeiculo implements Serializable {
     
     private Integer id;
     private String descricao;
-    private List<Veiculo> veiculos;
 
     public OpcionaisVeiculo() {
     }
@@ -56,25 +55,13 @@ public class OpcionaisVeiculo implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "descricao")
+    @Column(name = "descricaoopcionaisveiculo")
     public String getDescricao() {
         return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    @ManyToMany
-    @JoinTable(name="veiculo_opcionais",
-             joinColumns={@JoinColumn(name = "veiculo_id")},
-             inverseJoinColumns={@JoinColumn(name = "opcional_id")})
-    public List<Veiculo> getVeiculos() {
-        return veiculos;
-    }
-
-    public void setVeiculos(List<Veiculo> veiculos) {
-        this.veiculos = veiculos;
     }
 
     @Override
