@@ -7,14 +7,14 @@
 
     <ui:define name="content">
         <h:form>
-            <h:dataTable id="veiculos"
+            <h:dataTable  id="veiculos"
                          var="veiculo"
                          rendered="#{! empty veiculoController.veiculos}"
                          value="#{veiculoController.veiculos}" 
                          border="1">
                 <h:column>
                     <f:facet name="header"><h:outputText value="Id" /></f:facet>
-                    <h:outputText value="#{veiculo.id}" />
+                    <h:outputText  value="#{veiculo.id}" />
                 </h:column>
                 <h:column>
                     <f:facet name="header"><h:outputText value="Placa" /></f:facet>
