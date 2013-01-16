@@ -15,12 +15,43 @@
 
         <div id="top">
             <ui:insert name="top">
-                <a href="/GestaoFrota/pages/usuario/listaVeiculo.jsf">Veiculos</a>
+                
+                <div class="offset1 span9 offset1">    
+                    <img class="" src="imagens/html/header_top.jpg" width="770" height="135" border="0" alt="Cabe&ccedil;alho Portal Unipampa" usemap="#Map" />
+                    <map name="Map">
+                        <area shape="rect" coords="57,7,240,118" alt="P&aacute;gina inicial" href="http://www.unipampa.edu.br/portal/index.php/inicio" />
+                        <area shape="rect" coords="471,63,511,77" alt="Site Campus Alegrete" href="http://www.unipampa.edu.br/alegrete/" />
+                        <area shape="rect" coords="557,59,629,72" alt="Site Campus Ca&ccedil;apava do Sul" href="http://www.unipampa.edu.br/cacapava/" />
+                        <area shape="rect" coords="521,61,546,76" alt="Site Campus Bag&eacute;" href="http://www.unipampa.edu.br/bage/" />
+                        <area shape="rect" coords="640,59,697,73" alt="Site Campus Dom Pedrito" href="http://www.unipampa.edu.br/dompedrito/" />
+                        <area shape="rect" coords="574,76,602,90" alt="Site Campus Itaqui" href="http://www.unipampa.edu.br/itaqui/" />
+                        <area shape="rect" coords="612,76,656,90" alt="Site Campus Jaguar&atilde;o" href="http://www.unipampa.edu.br/jaguarao/" />
+                        <area shape="poly" coords="668,77,706,79,763,86,762,96,710,90,667,88" alt="Site Campus Livramento" href="http://www.unipampa.edu.br/livramento/" />
+                        <area shape="rect" coords="476,98,519,111" alt="Site Campus S&atilde;o Borja" href="http://www.unipampa.edu.br/saoborja/" />
+                        <area shape="rect" coords="530,95,583,108" alt="Site Campus S&atilde;o Gabriel" href="http://www.unipampa.edu.br/saogabriel/" />
+                        <area shape="rect" coords="594,94,647,108" alt="Site Campus Uruguaiana" href="http://www.unipampa.edu.br/uruguaiana/" />
+                    </map>
+                </div>
+                <div style="text-align: center;color: green" class="span9">
+                    <h2 class="well">Sistema de caronas Unipampa - Alegrete</h2>
+                </div>
+
             </ui:insert>
         </div>
 
+        <div id="left" class="center_content">
+            <ui:insert name="menu">
+                 <div style="" id="menu" class="span3">
+                    <a style="width: 90%" class="btn" href=""><img src="imagens/html/plus_add_green.png" />Novo veiculo</a>
+                    <a style="width: 90%" class="btn" href=""><img src="imagens/html/view_detailed.png"  />Lista de veiculos</a>
+                    <a style="width: 90%" class="btn" href=""><img src="imagens/html/user-group-new.png" />Novo usuario</a>
+                    <a style="width: 90%" class="btn" href=""><img src="imagens/html/preferences-contact-list.png"/>Lista de usuario</a>
+                </div>
+            </ui:insert>
+        </div>
+        
         <div id="content" class="center_content">
-            <ui:insert name="content">
+            <ui:insert name="conteudo">
                 <div>
                     <h1>Template</h1>
                     <p>asdiglabaluanlunua</p>
