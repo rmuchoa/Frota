@@ -9,20 +9,20 @@
         <h:form class="form-horizontal">
             <fieldset>
                 <h:inputHidden id="id" value="#{veiculoController.veiculo.id}" />
-                <div class="control-group"><label>Placa:</label> <h:inputText id="placa" value="#{veiculoController.veiculo.placa}" /></div>
-                <div class="control-group"><label>Renavam:</label> <h:inputText id="renavam" value="#{veiculoController.veiculo.renavam}" /></div>
-                <div class="control-group"><label>Marca:</label> <h:inputText id="marca" value="#{veiculoController.veiculo.marca}" /></div>
-                <div class="control-group"><label>Modelo:</label> <h:inputText id="modelo" value="#{veiculoController.veiculo.modelo}" /></div>
-                <div class="control-group"><label>Cor:</label> <h:inputText id="cor" value="#{veiculoController.veiculo.cor}" /></div>
-                <div class="control-group"><label>Ano:</label> <h:inputText id="ano" value="#{veiculoController.veiculo.ano}" /></div>
-                <div class="control-group"><label>Tipo:</label><h:selectOneMenu id="tipo" 
+                <div class="control-group"><label class="control-label">Placa:</label> <h:inputText id="placa" value="#{veiculoController.veiculo.placa}" /></div>
+                <div class="control-group"><label class="control-label">Renavam:</label> <h:inputText id="renavam" value="#{veiculoController.veiculo.renavam}" /></div>
+                <div class="control-group"><label class="control-label">Marca:</label> <h:inputText id="marca" value="#{veiculoController.veiculo.marca}" /></div>
+                <div class="control-group"><label class="control-label">Modelo:</label> <h:inputText id="modelo" value="#{veiculoController.veiculo.modelo}" /></div>
+                <div class="control-group"><label class="control-label">Cor:</label> <h:inputText id="cor" value="#{veiculoController.veiculo.cor}" /></div>
+                <div class="control-group"><label class="control-label">Ano:</label> <h:inputText id="ano" value="#{veiculoController.veiculo.ano}" /></div>
+                <div class="control-group"><label class="control-label">Tipo:</label><h:selectOneMenu id="tipo" 
                                                                                 value="#{veiculoController.tipoSelecionado}" 
                                                                                 converter="TipoVeiculoConverter">
                         <f:selectItems value="#{tipoVeiculoController.tipos}" var="tipo" itemLabel="#{tipo.descricao}" />
                     </h:selectOneMenu>
                 </div>
-                <div class="control-group"><label> Capacidade de Passageiros:</label> <h:inputText id="passageiros" value="#{veiculoController.veiculo.capacidadePassageiros}" /></div>
-                <div class="control-group"><label>Capacidade de Carga:</label> <h:inputText id="carga" value="#{veiculoController.veiculo.capacidadeCarga}" /></div>
+                <div class="control-group"><label class="control-label"> Capacidade de Passageiros:</label> <h:inputText id="passageiros" value="#{veiculoController.veiculo.capacidadePassageiros}" /></div>
+                <div class="control-group"><label class="control-label">Capacidade de Carga:</label> <h:inputText id="carga" value="#{veiculoController.veiculo.capacidadeCarga}" /></div>
                 <div class="well"> 
                     <ui:repeat value="#{opcionaisVeiculoController.opcionais}" var="opcional" varStatus="i" >
                         <div class="control-group"> <label>#{opcional.descricao}:</label> <h:selectBooleanCheckbox  value="#{veiculoController.checked[opcional.id]}" /></div>

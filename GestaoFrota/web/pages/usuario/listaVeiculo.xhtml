@@ -8,7 +8,7 @@
     <ui:define name="conteudo">
         <h:form>
             <h:commandButton  image="/imagens/html/car_add.png" class="btn" value="Novo Veículo" action="formulario" /><br/>
-            <h:dataTable  id="veiculos" class="table"
+            <h:dataTable class="table" id="veiculos"
                          var="veiculo"
                          rendered="#{! empty veiculoController.veiculos}"
                          value="#{veiculoController.veiculos}" 
@@ -48,6 +48,7 @@
                 </h:column>
             </h:dataTable>
             
+          
         </h:form>
         
         <h:messages showDetail="true" showSummary="false" styleClass="error" layout="table" />
