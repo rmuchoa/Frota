@@ -8,16 +8,18 @@
     <ui:define name="conteudo">
         <h:form class="form-horizontal">
             <fieldset>
-                <h:inputHidden id="id" value="#{veiculoController.veiculo.id}" />
+                <h:inputHidden id="hidden" value="#{veiculoController.veiculo.id}" />
+                <div class="control-group"><label class="control-label">Id:</label> <h:inputText id="id" value="#{veiculoController.veiculo.id}" disabled="true" /></div>
                 <div class="control-group"><label class="control-label">Placa:</label> <h:inputText id="placa" value="#{veiculoController.veiculo.placa}" /></div>
                 <div class="control-group"><label class="control-label">Renavam:</label> <h:inputText id="renavam" value="#{veiculoController.veiculo.renavam}" /></div>
                 <div class="control-group"><label class="control-label">Marca:</label> <h:inputText id="marca" value="#{veiculoController.veiculo.marca}" /></div>
                 <div class="control-group"><label class="control-label">Modelo:</label> <h:inputText id="modelo" value="#{veiculoController.veiculo.modelo}" /></div>
                 <div class="control-group"><label class="control-label">Cor:</label> <h:inputText id="cor" value="#{veiculoController.veiculo.cor}" /></div>
                 <div class="control-group"><label class="control-label">Ano:</label> <h:inputText id="ano" value="#{veiculoController.veiculo.ano}" /></div>
-                <div class="control-group"><label class="control-label">Tipo:</label><h:selectOneMenu id="tipo" 
-                                                                                                      value="#{veiculoController.tipoSelecionado}" 
-                                                                                                      converter="TipoVeiculoConverter">
+                <div class="control-group"><label class="control-label">Tipo:</label>
+                    <h:selectOneMenu id="tipo" 
+                                     value="#{veiculoController.tipoSelecionado}" 
+                                     converter="TipoVeiculoConverter">
                         <f:selectItems value="#{tipoVeiculoController.tipos}" var="tipo" itemLabel="#{tipo.descricao}" />
                     </h:selectOneMenu>
                 </div>
