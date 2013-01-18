@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <ui:define name="conteudo">
+
+                <h:form>
+                    <h:commandButton  image="/imagens/html/car_add.png" class="btn" value="Novo Usuario" action="formulario" />
+                </h:form>  
+
+                <h:form>  
+                    <p:dataTable var="usuario" value="#{usuarioController.usuarios}">  
+                        <p:column headerText="Nome">  
+                            <h:outputText value="#{usuario.nome}" />  
+                        </p:column>  
+
+                        <p:column headerText="Login">  
+                            <h:outputText value="#{usuario.login}" />  
+                        </p:column>  
+
+                        <p:column headerText="Email">  
+                            <h:outputText value="#{usuario.email}" />  
+                        </p:column>  
+
+                        <p:column headerText="Tipo">  
+                            <h:outputText value="#{usuario.tipoUsuario.descricao}" />  
+                        </p:column>  
+
+                        <p:column headerText="Siape">  
+                            <h:outputText value="#{usuario.siape}" />  
+                        </p:column>  
+
+                        <p:column headerText="Ações">  
+                            <h:commandButton class="btn btn-mini btn-primary" 
+                                             image="/imagens/html/edit.png" 
+                                             title="Editar Veículo" value="edit" 
+                                             action="#{veiculoController.editar()}">
+                                <f:param name="id" value="#{usuario.id}" />
+                            </h:commandButton>
+                            <h:commandButton class="btn btn-mini btn-danger" 
+                                             image="/imagens/html/remove.png" 
+                                             title="Remover Veículo" value="remove" 
+                                             action="#{veiculoController.deletar()}">
+                                <f:param name="id" value="#{usuario.id}" />
+                            </h:commandButton>
+                        </p:column>  
+                    </p:dataTable>  
+                </h:form>  
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
