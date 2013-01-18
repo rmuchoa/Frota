@@ -175,7 +175,7 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    @Column(name = "numeroCnh")
+    @Column(name = "numero_cnh")
     public BigInteger getNumeroCnh() {
         return numeroCnh;
     }
@@ -184,7 +184,7 @@ public class Usuario implements Serializable {
         this.numeroCnh = numeroCnh;
     }
 
-    @Column(name = "validadeCnh")
+    @Column(name = "validade_cnh")
     @Temporal(TemporalType.DATE)
     public Date getValidadeCnh() {
         return validadeCnh;
@@ -195,7 +195,7 @@ public class Usuario implements Serializable {
     }
 
     @Size(max = 3)
-    @Column(name = "categoriaCnh")
+    @Column(name = "categoria_cnh")
     public String getCategoriaCnh() {
         return categoriaCnh;
     }
@@ -225,7 +225,7 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
-    @JoinColumn(name = "tipoUsuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "tipo_usuario", referencedColumnName = "id")
     @ManyToOne(optional = false)
     public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
@@ -235,7 +235,7 @@ public class Usuario implements Serializable {
         this.tipoUsuario = tipoUsuario;
     }
 
-    @JoinColumn(name = "cidade_id", referencedColumnName = "id")
+    @JoinColumn(name = "cidade", referencedColumnName = "id")
     @ManyToOne(optional = false)
     public Cidade getCidade() {
         return cidade;

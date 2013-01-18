@@ -18,7 +18,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import org.primefaces.event.FlowEvent;
 
 /**
@@ -41,7 +40,6 @@ public class UsuarioController implements Serializable {
     private Integer id;
     
     public UsuarioController() {
-        this.model = new UsuarioModelBean();
         this.usuario = new Usuario();
     }
     
