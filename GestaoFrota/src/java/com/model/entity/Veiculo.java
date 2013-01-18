@@ -65,8 +65,6 @@ public class Veiculo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     public Integer getId() {
         return id;
@@ -76,7 +74,6 @@ public class Veiculo implements Serializable {
         this.id = id;
     }
 
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 7)
     @Column(name = "placa")
@@ -88,7 +85,6 @@ public class Veiculo implements Serializable {
         this.placa = placa;
     }
 
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 9)
     @Column(name = "renavam")
@@ -100,7 +96,6 @@ public class Veiculo implements Serializable {
         this.renavam = renavam;
     }
 
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "marca")
@@ -112,7 +107,6 @@ public class Veiculo implements Serializable {
         this.marca = marca;
     }
 
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "modelo")
@@ -124,7 +118,6 @@ public class Veiculo implements Serializable {
         this.modelo = modelo;
     }
 
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "cor")
@@ -136,7 +129,6 @@ public class Veiculo implements Serializable {
         this.cor = cor;
     }
 
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 4)
     @Column(name = "ano")
@@ -148,7 +140,6 @@ public class Veiculo implements Serializable {
         this.ano = ano;
     }
 
-    @Basic(optional = false)
     @NotNull
     @Column(name = "capacidadepassageiros")
     public int getCapacidadePassageiros() {
@@ -159,7 +150,6 @@ public class Veiculo implements Serializable {
         this.capacidadePassageiros = capacidadePassageiros;
     }
 
-    @Basic(optional = false)
     @NotNull
     @Column(name = "capacidadecarga")
     public int getCapacidadeCarga() {

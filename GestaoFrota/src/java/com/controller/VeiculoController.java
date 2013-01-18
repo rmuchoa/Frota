@@ -51,6 +51,7 @@ public class VeiculoController implements Serializable {
     public String salvar() {
         veiculo.setTipoVeiculo(tipoSelecionado);
         relacionarOpcionais();
+        System.out.println("id: "+ veiculo.getId());
         if(veiculo.getId() == null) {
             dao.inserir(veiculo);
             this.veiculos = dao.listar();
