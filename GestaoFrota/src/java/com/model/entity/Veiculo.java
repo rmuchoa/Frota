@@ -141,7 +141,7 @@ public class Veiculo implements Serializable {
     }
 
     @NotNull
-    @Column(name = "capacidadepassageiros")
+    @Column(name = "capacidade_passageiros")
     public int getCapacidadePassageiros() {
         return capacidadePassageiros;
     }
@@ -151,7 +151,7 @@ public class Veiculo implements Serializable {
     }
 
     @NotNull
-    @Column(name = "capacidadecarga")
+    @Column(name = "capacidade_carga")
     public int getCapacidadeCarga() {
         return capacidadeCarga;
     }
@@ -161,9 +161,9 @@ public class Veiculo implements Serializable {
     }
 
     @ManyToMany()
-    @JoinTable(name="veiculo_opcionaisveiculo",
-             joinColumns={@JoinColumn(name = "veiculo_id")},
-             inverseJoinColumns={@JoinColumn(name = "opcionaisveiculo_id")})
+    @JoinTable(name="veiculo_opcionais_veiculo",
+             joinColumns={@JoinColumn(name = "id_veiculo")},
+             inverseJoinColumns={@JoinColumn(name = "id_opcionais_veiculo")})
     public List<OpcionaisVeiculo> getOpcionaisVeiculo() {
         return opcionaisVeiculo;
     }
@@ -172,7 +172,7 @@ public class Veiculo implements Serializable {
         this.opcionaisVeiculo = opcionaisVeiculo;
     }
 
-    @JoinColumn(name = "id_tipoveiculo", referencedColumnName = "id")
+    @JoinColumn(name = "tipo_veiculo", referencedColumnName = "id")
     @ManyToOne
     public TipoVeiculo getTipoVeiculo() {
         return tipoVeiculo;

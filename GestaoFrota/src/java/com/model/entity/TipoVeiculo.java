@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
  * @author renanmarceluchoa
  */
 @Entity
-@Table(name = "tipoveiculo")
+@Table(name = "tipo_veiculo")
 @NamedQueries({
     @NamedQuery(name = "TipoVeiculo.findAll", query = "SELECT t FROM TipoVeiculo t"),
     @NamedQuery(name = "TipoVeiculo.findById", query = "SELECT t FROM TipoVeiculo t WHERE t.id = :id"),
@@ -53,7 +53,7 @@ public class TipoVeiculo implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 255)
-    @Column(name = "descricaotipoveiculo")
+    @Column(name = "descricao")
     public String getDescricao() {
         return descricao;
     }

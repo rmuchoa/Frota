@@ -17,14 +17,14 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Cidade.findAll", query = "SELECT c FROM Cidade c"),
     @NamedQuery(name = "Cidade.findById", query = "SELECT c FROM Cidade c WHERE c.id = :id"),
-    @NamedQuery(name = "Cidade.findByNomeCidade", query = "SELECT c FROM Cidade c WHERE c.nomeCidade = :nomeCidade")})
+    @NamedQuery(name = "Cidade.findByNome", query = "SELECT c FROM Cidade c WHERE c.nome = :nome")})
 public class Cidade implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     private Integer id;
-    private String nomeCidade;
-    private Estado estadoId;
+    private String nome;
+    private Estado estado;
     
     public Cidade() {
     
@@ -45,23 +45,23 @@ public class Cidade implements Serializable {
     }
 
     @Size(max = 255)
-    @Column(name = "nomeCidade")
-    public String getNomeCidade() {
-        return nomeCidade;
+    @Column(name = "nome")
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeCidade(String nomeCidade) {
-        this.nomeCidade = nomeCidade;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    @JoinColumn(name = "estado_id", referencedColumnName = "id")
+    @JoinColumn(name = "estado", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    public Estado getEstadoId() {
-        return estadoId;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setEstadoId(Estado estadoId) {
-        this.estadoId = estadoId;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
     @Override

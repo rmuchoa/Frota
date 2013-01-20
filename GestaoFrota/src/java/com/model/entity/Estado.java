@@ -18,15 +18,15 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Estado.findAll", query = "SELECT e FROM Estado e"),
     @NamedQuery(name = "Estado.findById", query = "SELECT e FROM Estado e WHERE e.id = :id"),
-    @NamedQuery(name = "Estado.findByNomeEstado", query = "SELECT e FROM Estado e WHERE e.nomeEstado = :nomeEstado"),
-    @NamedQuery(name = "Estado.findBySiglaEstado", query = "SELECT e FROM Estado e WHERE e.siglaEstado = :siglaEstado")})
+    @NamedQuery(name = "Estado.findByNome", query = "SELECT e FROM Estado e WHERE e.nome = :nome"),
+    @NamedQuery(name = "Estado.findBySigla", query = "SELECT e FROM Estado e WHERE e.sigla = :sigla")})
 public class Estado implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     private Integer id;
-    private String nomeEstado;
-    private String siglaEstado;
+    private String nome;
+    private String sigla;
     private List<Cidade> cidades;
 
     public Estado() {
@@ -48,26 +48,26 @@ public class Estado implements Serializable {
     }
 
     @Size(max = 255)
-    @Column(name = "nomeEstado")
-    public String getNomeEstado() {
-        return nomeEstado;
+    @Column(name = "nome")
+    public String getNome() {
+        return nome;
     }
 
-    public void setNomeEstado(String nomeEstado) {
-        this.nomeEstado = nomeEstado;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Size(max = 2)
-    @Column(name = "siglaEstado")
-    public String getSiglaEstado() {
-        return siglaEstado;
+    @Column(name = "sigla")
+    public String getSigla() {
+        return sigla;
     }
 
-    public void setSiglaEstado(String siglaEstado) {
-        this.siglaEstado = siglaEstado;
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estado")
     public List<Cidade> getCidades() {
         return cidades;
     }
