@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
@@ -13,7 +13,7 @@
             <ui:define name="conteudo">
 
                 <h:form>
-                    <h:commandButton  image="/imagens/html/car_add.png" class="btn" value="Novo Usuario" action="formulario" />
+                    <h:commandButton  image="/imagens/html/car_add.png" class="btn" value="Novo Usuario" action="#{usuarioController.cadastrar()}" />
                 </h:form>  
 
                 <h:form>  
@@ -24,10 +24,6 @@
 
                         <p:column headerText="Login">  
                             <h:outputText value="#{usuario.login}" />  
-                        </p:column>  
-
-                        <p:column headerText="Email">  
-                            <h:outputText value="#{usuario.email}" />  
                         </p:column>  
 
                         <p:column headerText="Tipo">  

@@ -13,10 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.primefaces.event.FlowEvent;
@@ -45,11 +46,16 @@ public class UsuarioController implements Serializable {
         this.usuario = new Usuario();
     }
     
-    public String salvar() {
+    public String salvar(ActionEvent actionEvent) {
         this.model.salvar(usuario);
         this.usuarios = model.listar();
         this.addMessage("O usuário "+usuario.getNome()+" foi "+model.getStatus()+"com sucesso!");
         return "listaUsuario";
+    }
+    
+    public String cadastrar() {
+        this.usuario = new Usuario();
+        return "formulario";
     }
     
     public String editar() {

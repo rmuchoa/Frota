@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.prime.com.tr/ui">
 
     <body>
 
@@ -18,107 +18,161 @@
 
                     <p:panel header="Formulário Usuarios: ">
 
-                        <p:wizard widgetVar="wizard" flowListener="#{usuarioController.onFlowProcess}"
-                                  nextLabel="Avançar" backLabel="Voltar">
+                        <p:wizard widgetVar="wiz" nextLabel="Avançar" backLabel="Voltar"
+                                  flowListener="#{usuarioController.onFlowProcess}">  
 
-                            <p:tab id="pessoal" title="Pessoal">
+                            <p:tab id="pessoal" title="Pessoal">  
 
                                 <p:panel header="Usuário">
-                                    <h:panelGrid columns="2" cellpadding="5" style="margin-bottom: 10px">
+
+                                    <h:messages errorClass="error"/>  
+                                    
+                                    <h:panelGrid columns="2" columnClasses="label, value" cellpadding="5" style="margin-bottom: 10px" styleClass="grid">
                                         <h:outputText value="Nome: " />
-                                        <h:inputText id="nome" value="#{usuarioController.usuario.nome}" />
+                                        <h:inputText label="Nome" value="#{usuarioController.usuario.nome}" />
 
                                         <h:outputText value="Login: " />
-                                        <h:inputText id="login" value="#{usuarioController.usuario.login}" />
+                                        <h:inputText label="Login" value="#{usuarioController.usuario.login}" />
 
                                         <h:outputText value="Senha: " />
-                                        <h:inputText id="senha" value="#{usuarioController.usuario.senha}" />
+                                        <h:inputSecret label="Senha" value="#{usuarioController.usuario.senha}" />
                                     </h:panelGrid>
                                 </p:panel>
 
                                 <p:panel header="Contato">
-                                    <h:panelGrid columns="2" cellpadding="5" style="margin-bottom: 10px">
+
+                                    <h:messages errorClass="error"/>  
+                                    
+                                    <h:panelGrid columns="2" columnClasses="label, value" cellpadding="5" style="margin-bottom: 10px" styleClass="grid">
                                         <h:outputText value="Email: " />
-                                        <h:inputText id="email" value="#{usuarioController.usuario.email}" />
+                                        <h:inputText label="Email" value="#{usuarioController.usuario.email}" />
 
                                         <h:outputText value="Telefone: " />
-                                        <p:inputMask id="fone" mask="(99) 9999-9999" value="#{usuarioController.usuario.telefone}" />
+                                        <p:inputMask label="Telefone" mask="(99) 9999-9999" value="#{usuarioController.usuario.telefone}" />
 
                                         <h:outputText value="Celular: " />
-                                        <p:inputMask id="celular" mask="(99) 9999-9999" value="#{usuarioController.usuario.celular}" />
+                                        <p:inputMask label="Celular" mask="(99) 9999-9999" value="#{usuarioController.usuario.celular}" />
+                                    </h:panelGrid>
+                                </p:panel>
+                                
+                            </p:tab>  
+                            
+                            <p:tab id="registro" title="Registro">    
+
+                                <p:panel header="Geral">
+
+                                    <h:messages errorClass="error"/>  
+                                    
+                                    <h:panelGrid columns="2" columnClasses="label, value" cellpadding="5" style="margin-bottom: 10px" styleClass="grid">
+                                        <h:outputText value="RG: " />
+                                        <h:inputText label="RG" value="#{usuarioController.usuario.rg}" />
                                     </h:panelGrid>
                                 </p:panel>
 
-                            </p:tab>
-                            
-                            <p:tab id="registro" title="Registro">    
-                                
-                                <p:panel header="Geral">
-                                    <h:panelGrid columns="2" cellpadding="5" style="margin-bottom: 10px">
-                                        <h:outputText value="RG: " />
-                                        <h:inputText id="rg" value="#{usuarioController.usuario.rg}" />
-                                    </h:panelGrid>
-                                </p:panel>
-                                
                                 <p:panel header="Siape">
-                                    <h:panelGrid columns="2" cellpadding="5" style="margin-bottom: 10px">
+
+                                    <h:messages errorClass="error"/>  
+                                    
+                                    <h:panelGrid columns="2" columnClasses="label, value" cellpadding="5" style="margin-bottom: 10px" styleClass="grid">
                                         <h:outputText value="Siape: " />
-                                        <p:inputMask id="siape" mask="9999999" value="#{usuarioController.usuario.siape}" />
+                                        <p:inputMask label="Siape" mask="9999999" value="#{usuarioController.usuario.siape}" />
                                     </h:panelGrid>
                                 </p:panel>
 
                                 <p:panel header="Habilitação">
-                                    <h:panelGrid columns="2" cellpadding="5" style="margin-bottom: 10px">
+
+                                    <h:messages errorClass="error"/>  
+                                    
+                                    <h:panelGrid columns="2" columnClasses="label, value" cellpadding="5" style="margin-bottom: 10px" styleClass="grid">
                                         <h:outputText value="Número: " />
-                                        <h:inputText id="cnh" value="#{usuarioController.usuario.numeroCnh}" />
+                                        <h:inputText label="Número" value="#{usuarioController.usuario.numeroCnh}" />
 
                                         <h:outputText value="Validade: " />
-                                        <p:calendar id="validade" value="#{usuarioController.usuario.validadeCnh}" showOn="button" />
+                                        <p:calendar label="Validade" value="#{usuarioController.usuario.validadeCnh}" showOn="button" />
 
                                         <h:outputText value="Categoria: " />
-                                        <h:inputText id="categoria" value="#{usuarioController.usuario.categoriaCnh}" />
+                                        <h:inputText label="Categoria" value="#{usuarioController.usuario.categoriaCnh}" />
                                     </h:panelGrid>
                                 </p:panel>
-                                
+
                             </p:tab>
                             
                             <p:tab id="endereço" title="Endereço">
-                                
+
                                 <p:panel header="Endereço">
-                                    <h:panelGrid columns="2" cellpadding="5" style="margin-bottom: 10px">
+
+                                    <h:messages errorClass="error"/> 
+                                    
+                                    <h:panelGrid columns="2" columnClasses="label, value" cellpadding="5" style="margin-bottom: 10px" styleClass="grid">
                                         <h:outputText value="Rua: " />
-                                        <h:inputText id="rua" value="#{usuarioController.usuario.rua}" />
+                                        <h:inputText label="Rua" value="#{usuarioController.usuario.rua}" />
 
                                         <h:outputText value="Número: " />
-                                        <h:inputText id="numero" value="#{usuarioController.usuario.numero}" />
+                                        <h:inputText label="Número" value="#{usuarioController.usuario.numero}" />
 
                                         <h:outputText value="Complemento: " />
-                                        <h:inputText id="complemento" value="#{usuarioController.usuario.complemento}" />
+                                        <h:inputText label="Complemento" value="#{usuarioController.usuario.complemento}" />
 
-                                        <h:outputText value="Cep: " />
-                                        <p:inputMask id="cep" mask="99999-999" value="#{usuarioController.usuario.cep}" />
+                                        <h:outputText value="CEP: " />
+                                        <p:inputMask label="CEP" mask="99999-999" value="#{usuarioController.usuario.cep}" />
                                     </h:panelGrid>
                                 </p:panel>
-                                
+
                             </p:tab>
                             
-                            <p:tab id="confirm" title="Sumário">
-                                
-                                <p:panel header="Confirmação">
-                                    <h:panelGrid columns="2" cellpadding="5" style="margin-bottom: 10px">
+                            <p:tab id="confirm" title="Confirmação">
+
+                                <p:panel header="Sumário">
+
+                                    <h:panelGrid columns="6" cellpadding="5" style="margin-bottom: 10px" styleClass="grid">
                                         <h:outputText value="Nome: " />
-                                        <h:outputText id="nome" value="#{usuarioController.usuario.nome}" />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.nome}" />
 
                                         <h:outputText value="Login: " />
-                                        <h:outputText id="login" value="#{usuarioController.usuario.login}" />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.login}" />
 
-                                        <h:outputText value="Email: " />
-                                        <h:outputText id="email" value="#{usuarioController.usuario.email}" />
+                                        <h:outputText value="Telefone: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.telefone}" />
 
-                                        <p:commandButton value="Salvar" actionListener="#{usuarioController.salvar}" update="growl" />
+                                        <h:outputText value="Celular: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.celular}" />
+
+                                        <h:outputText value="RG: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.rg}" />
+
+                                        <h:outputText value="Siape: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.siape}" />
                                     </h:panelGrid>
+
+                                    <h:panelGrid columns="6" cellpadding="5" style="margin-bottom: 10px" styleClass="grid">
+                                        <h:outputText value="Habilitação: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.numeroCnh}" />
+
+                                        <h:outputText value="Validade: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.validadeCnh}" />
+
+                                        <h:outputText value="Categoria: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.categoriaCnh}" />
+                                    </h:panelGrid>
+
+                                    <h:panelGrid columns="6" cellpadding="5" style="margin-bottom: 10px" styleClass="grid">
+                                        <h:outputText value="Rua: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.rua}" />
+
+                                        <h:outputText value="Numero: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.numero}" />
+
+                                        <h:outputText value="Complemento: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.complemento}" />
+
+                                        <h:outputText value="CEP: " />
+                                        <h:outputText styleClass="outputLabel" value="#{usuarioController.usuario.cep}" />
+                                    </h:panelGrid>
+
+                                    <p:commandButton value="Salvar" actionListener="#{usuarioController.salvar}" update="growl" />
+
                                 </p:panel>
-                                
+
                             </p:tab>
 
                         </p:wizard>
