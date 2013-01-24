@@ -31,7 +31,6 @@ public class UsuarioController implements Serializable {
     
     private Usuario usuario;
     private List<Usuario> usuarios;
-    private Usuario selectedUsuario;
     
     private static Logger logger = Logger.getLogger(UsuarioController.class.getName());  
     private Boolean skip;
@@ -54,7 +53,6 @@ public class UsuarioController implements Serializable {
     }
     
     public String editar() {
-        this.usuario = selectedUsuario;
         return "formulario";
     }
     
@@ -67,8 +65,7 @@ public class UsuarioController implements Serializable {
     }
     
     public String remover() {
-        System.out.println("----------> id: "+selectedUsuario.getId());
-        this.usuario = model.buscar(selectedUsuario.getId());
+        this.usuario = model.buscar(usuario.getId());
         this.model.remover(usuario);
         this.usuarios = model.listar();
         return "listaUsuario";
@@ -134,20 +131,6 @@ public class UsuarioController implements Serializable {
      */
     public void setSkip(Boolean skip) {
         this.skip = skip;
-    }
-
-    /**
-     * @return the selectedUsuario
-     */
-    public Usuario getSelectedUsuario() {
-        return selectedUsuario;
-    }
-
-    /**
-     * @param selectedUsuario the selectedUsuario to set
-     */
-    public void setSelectedUsuario(Usuario selectedUsuario) {
-        this.selectedUsuario = selectedUsuario;
     }
     
 }
