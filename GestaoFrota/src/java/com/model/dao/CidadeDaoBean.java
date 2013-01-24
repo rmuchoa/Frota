@@ -27,6 +27,11 @@ public class CidadeDaoBean implements CidadeDao {
         return query.getResultList();
     }
 
+    @Override
+    public Cidade buscar(Integer id) {
+        return em.find(Cidade.class, id);
+    }
+
     
     
 }

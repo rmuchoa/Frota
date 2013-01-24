@@ -27,6 +27,11 @@ public class TipoUsuarioDaoBean implements TipoUsuarioDao {
         return query.getResultList();
     }
 
+    @Override
+    public TipoUsuario buscar(Integer id) {
+        return em.find(TipoUsuario.class, id);
+    }
+
     
     
 }

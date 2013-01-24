@@ -15,6 +15,7 @@ import javax.ejb.Remote;
 @Remote
 public interface CidadeDao {
     
+    public Cidade buscar(Integer id);
     public List<Cidade> listar();
     
 }

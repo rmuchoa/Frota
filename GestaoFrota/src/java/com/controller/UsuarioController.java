@@ -5,20 +5,17 @@
 package com.controller;
 
 import com.model.UsuarioModel;
-import com.model.UsuarioModelBean;
 import com.model.entity.Usuario;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import org.primefaces.event.FlowEvent;
 
 /**
@@ -26,7 +23,7 @@ import org.primefaces.event.FlowEvent;
  * @author renanmarceluchoa
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class UsuarioController implements Serializable {
     
     @EJB
@@ -34,55 +31,68 @@ public class UsuarioController implements Serializable {
     
     private Usuario usuario;
     private List<Usuario> usuarios;
+    private Usuario selectedUsuario;
     
-    private static Logger logger = Logger.getLogger(UsuarioController.class.getName());
-    
-    @ManagedProperty(name="id", value="#{param.id}")
-    private Integer id;
+    private static Logger logger = Logger.getLogger(UsuarioController.class.getName());  
+    private Boolean skip;
     
     public UsuarioController() {
-        this.usuario = new Usuario();
+        
     }
     
-    public String salvar(ActionEvent actionEvent) {
-        this.model.salvar(usuario);
+    @PostConstruct
+    public void init() {
         this.usuarios = model.listar();
-        this.addMessage("O usuário "+usuario.getNome()+" foi "+model.getStatus()+"com sucesso!");
-        return "listaUsuario";
+        System.out.println(usuarios.size());
     }
     
     public String cadastrar() {
         this.usuario = new Usuario();
+        this.usuario.setCidade(model.buscarCidade(new Integer(1)));
+        this.usuario.setTipoUsuario(model.buscarTipoUsuario(new Integer(1)));
         return "formulario";
     }
     
     public String editar() {
-        this.usuario = model.buscar(id);
+        this.usuario = selectedUsuario;
         return "formulario";
     }
     
-    public String deletar() {
-        this.usuario = model.remover(id);
+    public String salvar() {
+        this.model.salvar(usuario);
         this.usuarios = model.listar();
-        this.addMessage("O usuário "+usuario.getNome()+" foi "+model.getStatus()+" com sucesso!");
+        FacesMessage msg = new FacesMessage("Successful", "Usuario "+usuario.getNome()+" "+model.getStatus()+" com sucesso!");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
         return "listaUsuario";
     }
     
-    @PostConstruct
-    public void listar() {
+    public String remover() {
+        System.out.println("----------> id: "+selectedUsuario.getId());
+        this.usuario = model.buscar(selectedUsuario.getId());
+        this.model.remover(usuario);
         this.usuarios = model.listar();
+        return "listaUsuario";
     }
     
-    public String onFlowProcess(FlowEvent event) {
-        logger.log(Level.INFO, "Current wizard step:{0}", event.getOldStep());  
-        logger.log(Level.INFO, "Next step:{0}", event.getNewStep());
-        return event.getNewStep();
-    }
-    
-    public void addMessage(String message) {
-        FacesMessage msg = new FacesMessage("Successful", message);  
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
+    public void save(ActionEvent actionEvent) {  
+        this.model.salvar(usuario);
+        this.usuarios = model.listar();
+        FacesMessage msg = new FacesMessage("Successful", "Usuario " + usuario.getNome() + " registrado com sucesso!");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }  
+      
+    public String onFlowProcess(FlowEvent event) {  
+        logger.info("Current wizard step:" + event.getOldStep());  
+        logger.info("Next step:" + event.getNewStep());  
+          
+        if(skip) {  
+            skip = false;
+            return "confirm";  
+        }  
+        else {  
+            return event.getNewStep();  
+        }  
+    } 
     
     /**
      * @return the usuario
@@ -113,17 +123,31 @@ public class UsuarioController implements Serializable {
     }
 
     /**
-     * @return the id
+     * @return the skip
      */
-    public Integer getId() {
-        return id;
+    public Boolean getSkip() {
+        return skip;
     }
 
     /**
-     * @param id the id to set
+     * @param skip the skip to set
      */
-    public void setId(Integer id) {
-        this.id = id;
+    public void setSkip(Boolean skip) {
+        this.skip = skip;
+    }
+
+    /**
+     * @return the selectedUsuario
+     */
+    public Usuario getSelectedUsuario() {
+        return selectedUsuario;
+    }
+
+    /**
+     * @param selectedUsuario the selectedUsuario to set
+     */
+    public void setSelectedUsuario(Usuario selectedUsuario) {
+        this.selectedUsuario = selectedUsuario;
     }
     
 }

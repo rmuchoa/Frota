@@ -4,7 +4,6 @@
  */
 package com.model.entity;
 
-import com.model.entity.TipoUsuario;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
@@ -41,22 +40,22 @@ public class Usuario implements Serializable {
     
     private Integer id;
     private String nome;
-    private String rg;
-    private String rua;
-    private Integer numero;
-    private String complemento;
-    private String telefone;
-    private String celular;
-    private Integer siape;
     private String login;
     private String senha;
+    private String telefone;
+    private String celular;
+    private String email;
+    private String rg;
+    private Integer siape;
     private BigInteger numeroCnh;
     private Date validadeCnh;
     private String categoriaCnh;
+    private String rua;
+    private Integer numero;
+    private String complemento;
     private String cep;
-    private String email;
-    private TipoUsuario tipoUsuario;
     private Cidade cidade;
+    private TipoUsuario tipoUsuario;
 
     public Usuario() {
         
@@ -126,7 +125,7 @@ public class Usuario implements Serializable {
         this.complemento = complemento;
     }
 
-    @Size(max = 11)
+    @Size(max = 20)
     @Column(name = "telefone")
     public String getTelefone() {
         return telefone;
@@ -136,7 +135,7 @@ public class Usuario implements Serializable {
         this.telefone = telefone;
     }
 
-    @Size(max = 11)
+    @Size(max = 20)
     @Column(name = "celular")
     public String getCelular() {
         return celular;
@@ -204,7 +203,7 @@ public class Usuario implements Serializable {
         this.categoriaCnh = categoriaCnh;
     }
 
-    @Size(max = 8)
+    @Size(max = 9)
     @Column(name = "cep")
     public String getCep() {
         return cep;

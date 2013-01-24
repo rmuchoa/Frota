@@ -4,7 +4,11 @@
  */
 package com.model;
 
+import com.model.dao.CidadeDao;
+import com.model.dao.TipoUsuarioDao;
 import com.model.dao.UsuarioDao;
+import com.model.entity.Cidade;
+import com.model.entity.TipoUsuario;
 import com.model.entity.Usuario;
 import java.util.List;
 import javax.ejb.EJB;
@@ -19,6 +23,12 @@ public class UsuarioModelBean implements UsuarioModel {
     
     @EJB
     private UsuarioDao dao;
+    
+    @EJB
+    private TipoUsuarioDao tipoUsuario;
+    @EJB
+    private CidadeDao cidade;
+    
     private String status;
     
     public UsuarioModelBean() {
@@ -58,6 +68,26 @@ public class UsuarioModelBean implements UsuarioModel {
     @Override
     public List<Usuario> listar() {
         return dao.listar();
+    }
+
+    @Override
+    public TipoUsuario buscarTipoUsuario(Integer id) {
+        return tipoUsuario.buscar(id);
+    }
+
+    @Override
+    public List<TipoUsuario> listarTiposUsuario() {
+        return tipoUsuario.listar();
+    }
+
+    @Override
+    public Cidade buscarCidade(Integer id) {
+        return cidade.buscar(id);
+    }
+
+    @Override
+    public List<Cidade> listarCidades() {
+        return cidade.listar();
     }
 
     /**

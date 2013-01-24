@@ -15,6 +15,7 @@ import javax.ejb.Remote;
 @Remote
 public interface TipoUsuarioDao {
     
+    public TipoUsuario buscar(Integer id);
     public List<TipoUsuario> listar();
     
 }
