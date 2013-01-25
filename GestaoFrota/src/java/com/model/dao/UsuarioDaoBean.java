@@ -34,6 +34,7 @@ public class UsuarioDaoBean implements UsuarioDao {
 
     @Override
     public void remover(Usuario usuario) {
+        usuario = em.merge(usuario);
         em.remove(usuario);
     }
 

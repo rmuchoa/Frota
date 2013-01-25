@@ -4,7 +4,7 @@
  */
 package com.controller.converter;
 
-import com.model.entity.TipoVeiculo;
+import com.model.entity.TipoUsuario;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -14,8 +14,8 @@ import javax.faces.convert.FacesConverter;
  *
  * @author renanmarceluchoa
  */
-@FacesConverter(value="TipoVeiculoConverter")
-public class TipoVeiculoConverter implements Converter {
+@FacesConverter(value="TipoUsuarioConverter")
+public class TipoUsuarioConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -35,7 +35,7 @@ public class TipoVeiculoConverter implements Converter {
         
         if (value != null) {
         
-            TipoVeiculo tipo = (TipoVeiculo) value;
+            TipoUsuario tipo = (TipoUsuario) value;
             String key = tipo.getDescricao();
             component.getAttributes().put(key, tipo);
             return key;

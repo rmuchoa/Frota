@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <ui:define name="conteudo">
+
+                <p:panel header="Usuario:">
+
+                    <h:panelGrid columns="4" cellpadding="5" >
+                        <h:outputLabel for="nome" value="Nome: " /><h:outputText id="nome" value="#{usuarioController.usuario.nome}" />
+                        <h:outputLabel for="login" value="Login: " /><h:outputText id="login" value="#{usuarioController.usuario.login}" />
+                        <h:outputLabel for="telefone" value="Telefone: " /><h:outputText id="telefone" value="#{usuarioController.usuario.telefone}" />
+                        <h:outputLabel for="celular" value="Celular: " /><h:outputText id="celular" value="#{usuarioController.usuario.celular}" />
+                        <h:outputLabel for="tipo" value="Tipo: " /><h:outputText id="tipo" value="#{usuarioController.usuario.tipoUsuario.descricao}" />
+                        <h:outputLabel for="email" value="Email: " /><h:outputText id="email" value="#{usuarioController.usuario.email}" />
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="4" cellpadding="5" >
+                        <h:outputLabel for="rg" value="RG: " /><h:outputText id="rg" value="#{usuarioController.usuario.rg}" />
+                        <h:outputLabel for="siape" value="Siape: " /><h:outputText id="siape" value="#{usuarioController.usuario.siape}" />
+                        <h:outputLabel for="cnh" value="Habilitação: " /><h:outputText id="cnh" value="#{usuarioController.usuario.numeroCnh}" />
+                        <h:outputLabel for="validade" value="Validade: " /><h:outputText id="validade" value="#{usuarioController.usuario.validadeCnh}" />
+                        <h:outputLabel for="categoria" value="Categoria: " /><h:outputText id="categoria" value="#{usuarioController.usuario.categoriaCnh}" />
+                    </h:panelGrid>
+                    
+                    <h:panelGrid columns="4" cellpadding="5" >
+                        <h:outputLabel for="rua" value="Rua: " /><h:outputText id="rua" value="#{usuarioController.usuario.rua}" />
+                        <h:outputLabel for="numero" value="Numero: " /><h:outputText id="numero" value="#{usuarioController.usuario.numero}" />
+                        <h:outputLabel for="complemento" value="Complemento: " /><h:outputText id="complemento" value="#{usuarioController.usuario.complemento}" />
+                        <h:outputLabel for="cidade" value="Cidade: " /><h:outputText id="cidade" value="#{usuarioController.usuario.cidade.nome}" />
+                    </h:panelGrid>
+                    <f:facet name="footer">
+                        <p:button value="Voltar" outcome="listaUsuario" />
+                    </f:facet>
+                </p:panel>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

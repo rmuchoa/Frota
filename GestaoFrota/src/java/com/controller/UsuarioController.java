@@ -4,9 +4,16 @@
  */
 package com.controller;
 
+import com.model.CidadeModel;
+import com.model.EstadoModel;
+import com.model.TipoUsuarioModel;
 import com.model.UsuarioModel;
+import com.model.entity.Cidade;
+import com.model.entity.Estado;
+import com.model.entity.TipoUsuario;
 import com.model.entity.Usuario;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -15,7 +22,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import org.primefaces.event.FlowEvent;
 
 /**
@@ -28,9 +34,22 @@ public class UsuarioController implements Serializable {
     
     @EJB
     private UsuarioModel model;
+    @EJB
+    private TipoUsuarioModel tipo;
+    @EJB
+    private CidadeModel cidade;
+    @EJB
+    private EstadoModel estado;
     
     private Usuario usuario;
+    private Usuario selectedUsuario;
+    private String filtroNome;
     private List<Usuario> usuarios;
+    
+    private List<TipoUsuario> tipos;
+    private List<Cidade> cidades;
+    private List<Estado> estados;
+    private Estado selectedEstado;
     
     private static Logger logger = Logger.getLogger(UsuarioController.class.getName());  
     private Boolean skip;
@@ -42,41 +61,62 @@ public class UsuarioController implements Serializable {
     @PostConstruct
     public void init() {
         this.usuarios = model.listar();
+        this.tipos = tipo.listar();
+        this.cidades = new ArrayList<Cidade>();
+        this.estados = estado.listar();
         System.out.println(usuarios.size());
     }
     
-    public String cadastrar() {
+    public String add() {
         this.usuario = new Usuario();
-        this.usuario.setCidade(model.buscarCidade(new Integer(1)));
-        this.usuario.setTipoUsuario(model.buscarTipoUsuario(new Integer(1)));
+        //this.usuario.setCidade(model.buscarCidade(new Integer(1)));
+        //this.usuario.setTipoUsuario(model.buscarTipoUsuario(new Integer(1)));
         return "formulario";
     }
     
-    public String editar() {
+    public String edit() {
+        this.usuario = selectedUsuario;
         return "formulario";
     }
     
-    public String salvar() {
+    public String view() {
+        this.usuario = selectedUsuario;
+        return "viewUsuario";
+    }
+    
+    public String save() {
         this.model.salvar(usuario);
         this.usuarios = model.listar();
-        FacesMessage msg = new FacesMessage("Successful", "Usuario "+usuario.getNome()+" "+model.getStatus()+" com sucesso!");  
+        FacesMessage msg = new FacesMessage("Successful", "Usuario "+usuario.getNome()+" registrado com sucesso!");  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
         return "listaUsuario";
     }
     
-    public String remover() {
-        this.usuario = model.buscar(usuario.getId());
-        this.model.remover(usuario);
+    public String remove() {
+        this.model.remover(selectedUsuario);
         this.usuarios = model.listar();
         return "listaUsuario";
     }
     
-    public void save(ActionEvent actionEvent) {  
-        this.model.salvar(usuario);
+    public String filtrar() {
         this.usuarios = model.listar();
-        FacesMessage msg = new FacesMessage("Successful", "Usuario " + usuario.getNome() + " registrado com sucesso!");  
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-    }  
+        ArrayList<Usuario> list = new ArrayList<Usuario>();
+        for (int i=0; i<usuarios.size(); i++) {
+            if (usuarios.get(i).getNome().contains(filtroNome)) {
+                list.add(usuarios.get(i));
+            }
+        }
+        this.usuarios = list;
+        return "listaUsuario";
+    }
+    
+    public void updateCities() {
+        if (selectedEstado != null) {
+            cidades = cidade.listarByEstado(selectedEstado);
+        } else {
+            cidades = new ArrayList<Cidade>();
+        }
+    }
       
     public String onFlowProcess(FlowEvent event) {  
         logger.info("Current wizard step:" + event.getOldStep());  
@@ -106,6 +146,34 @@ public class UsuarioController implements Serializable {
     }
 
     /**
+     * @return the selectedUsuario
+     */
+    public Usuario getSelectedUsuario() {
+        return selectedUsuario;
+    }
+
+    /**
+     * @param selectedUsuario the selectedUsuario to set
+     */
+    public void setSelectedUsuario(Usuario selectedUsuario) {
+        this.selectedUsuario = selectedUsuario;
+    }
+
+    /**
+     * @return the filtroNome
+     */
+    public String getFiltroNome() {
+        return filtroNome;
+    }
+
+    /**
+     * @param filtroNome the filtroNome to set
+     */
+    public void setFiltroNome(String filtroNome) {
+        this.filtroNome = filtroNome;
+    }
+
+    /**
      * @return the usuarios
      */
     public List<Usuario> getUsuarios() {
@@ -117,6 +185,62 @@ public class UsuarioController implements Serializable {
      */
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    /**
+     * @return the tipos
+     */
+    public List<TipoUsuario> getTipos() {
+        return tipos;
+    }
+
+    /**
+     * @param tipos the tipos to set
+     */
+    public void setTipos(List<TipoUsuario> tipos) {
+        this.tipos = tipos;
+    }
+
+    /**
+     * @return the cidades
+     */
+    public List<Cidade> getCidades() {
+        return cidades;
+    }
+
+    /**
+     * @param cidades the cidades to set
+     */
+    public void setCidades(List<Cidade> cidades) {
+        this.cidades = cidades;
+    }
+
+    /**
+     * @return the estados
+     */
+    public List<Estado> getEstados() {
+        return estados;
+    }
+
+    /**
+     * @param estados the estados to set
+     */
+    public void setEstados(List<Estado> estados) {
+        this.estados = estados;
+    }
+
+    /**
+     * @return the selectedEstado
+     */
+    public Estado getSelectedEstado() {
+        return selectedEstado;
+    }
+
+    /**
+     * @param selectedEstado the selectedEstado to set
+     */
+    public void setSelectedEstado(Estado selectedEstado) {
+        this.selectedEstado = selectedEstado;
     }
 
     /**

@@ -13,36 +13,52 @@
             <ui:define name="conteudo">
 
                 <h:form>  
-
-                    <p:dataTable id="dataTable" var="usuario" value="#{usuarioController.usuarios}" 
-                                 paginator="true" >  
-                        <f:facet name="header">  
-                            Usuários Cadastrados  
-                        </f:facet>  
-
-                        <p:column sortBy="#{usuario.nome}" headerText="Nome">  
-                            <h:outputText value="#{usuario.nome}" />
-                            <h:inputHidden value="#{usuario.id}" />
-                        </p:column>  
-
-                        <p:column sortBy="#{usuario.login}" headerText="Login">  
-                            <h:outputText value="#{usuario.login}" />  
-                        </p:column>  
-
-                        <p:column sortBy="#{usuario.email}" headerText="Email">  
-                            <h:outputText value="#{usuario.email}" />  
-                        </p:column>  
-
-                        <p:column sortBy="#{usuario.tipoUsuario.descricao}" headerText="Tipo">  
-                            <h:outputText value="#{usuario.tipoUsuario.descricao}" />  
-                        </p:column>  
-
-                    </p:dataTable>  
                     
-                    <h:commandButton value="Novo" action="#{usuarioController.cadastrar()}" />
-                    <h:commandButton value="Mostrar" action="detalhe" />
-                    <h:commandButton value="Editar" action="formulario" />
-                    <h:commandButton value="Deletar" action="#{usuarioController.remover()}" />
+                    <p:panel style="border: 0px">
+                        
+                        <h:panelGrid cellpadding="5">
+                            <h:commandButton value="Novo" style="margin-bottom: 10px" action="#{usuarioController.add()}" />
+                        </h:panelGrid>
+                        
+                        <h:panelGrid columns="4" cellpadding="5" >
+                            <h:outputText value="Nome: " />
+                            <h:inputText id="filtro" style="width: 500px" value="#{usuarioController.filtroNome}" />
+                            <h:commandButton value="Filtrar" style="margin-bottom: 10px" action="#{usuarioController.filtrar()}" />
+                        </h:panelGrid>
+                        
+                        <p:dataTable id="dataTable" var="usuario" value="#{usuarioController.usuarios}" 
+                                     paginator="true" rows="15" >  
+                            <f:facet name="header">  
+                                Usuários Cadastrados  
+                            </f:facet>  
+
+                            <p:column sortBy="#{usuario.nome}" headerText="Nome">  
+                                <h:outputText value="#{usuario.nome}" />
+                                <h:inputHidden value="#{usuario.id}" />
+                            </p:column>  
+
+                            <p:column sortBy="#{usuario.login}" headerText="Login">  
+                                <h:outputText value="#{usuario.login}" />  
+                            </p:column>  
+
+                            <p:column sortBy="#{usuario.tipoUsuario.descricao}" headerText="Tipo">  
+                                <h:outputText value="#{usuario.tipoUsuario.descricao}" />  
+                            </p:column>  
+
+                            <p:column>  
+                                <h:commandButton id="viewButton" action="#{usuarioController.view()}" image="/imagens/html/remove.png">
+                                    <f:setPropertyActionListener value="#{usuario}" target="#{usuarioController.selectedUsuario}" />
+                                </h:commandButton>
+                                <h:commandButton id="editButton" action="#{usuarioController.edit()}" image="/imagens/html/edit.png">
+                                    <f:setPropertyActionListener value="#{usuario}" target="#{usuarioController.selectedUsuario}" />
+                                </h:commandButton>
+                                <h:commandButton id="removeButton" action="#{usuarioController.remove()}" image="/imagens/html/remove.png">
+                                    <f:setPropertyActionListener value="#{usuario}" target="#{usuarioController.selectedUsuario}" />
+                                </h:commandButton>
+                            </p:column>  
+
+                        </p:dataTable> 
+                    </p:panel>
 
                 </h:form>   
 

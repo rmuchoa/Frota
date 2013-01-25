@@ -20,6 +20,11 @@ public class EstadoDaoBean implements EstadoDao {
 
     @PersistenceContext(unitName="FrotaPU")
     private EntityManager em;
+
+    @Override
+    public Estado buscar(Integer id) {
+        return em.find(Estado.class, id);
+    }
     
     @Override
     public List<Estado> listar() {

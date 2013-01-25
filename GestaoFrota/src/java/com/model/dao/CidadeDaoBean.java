@@ -5,6 +5,7 @@
 package com.model.dao;
 
 import com.model.entity.Cidade;
+import com.model.entity.Estado;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,6 +31,13 @@ public class CidadeDaoBean implements CidadeDao {
     @Override
     public Cidade buscar(Integer id) {
         return em.find(Cidade.class, id);
+    }
+
+    @Override
+    public List<Cidade> buscarByEstado(Estado estado) {
+        Query query = em.createNamedQuery("Cidade.findByEstado");
+        query.setParameter("estado", estado);
+        return query.getResultList();
     }
 
     

@@ -5,6 +5,7 @@
 package com.model;
 
 import com.model.entity.Cidade;
+import com.model.entity.Estado;
 import com.model.entity.TipoUsuario;
 import com.model.entity.Usuario;
 import java.util.List;
@@ -22,12 +23,5 @@ public interface UsuarioModel {
     public Usuario remover(Integer id);
     public Usuario buscar(Integer id);
     public List<Usuario> listar();
-    public String getStatus();
-    public void setStatus(String status);
-    
-    public TipoUsuario buscarTipoUsuario(Integer id);
-    public List<TipoUsuario> listarTiposUsuario();
-    public Cidade buscarCidade(Integer id);
-    public List<Cidade> listarCidades();
     
 }
