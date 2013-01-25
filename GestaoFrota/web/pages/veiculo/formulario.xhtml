@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="conteudo">
+        <h:form class="form-horizontal" prependId="false">
+            
+            <p:growl id="growl" showDetail="true" />
+            <h:inputHidden id="id" value="#{veiculoController.veiculo.id}" />
+            
+            <p:panel header="Formulário Veiculos: " >
+                <h:panelGrid columns="2" cellpadding="5" style="margin-bottom: 10px" >
+                    
+                    <h:outputText value="Placa:* " /><p:inputMask id="placa" value="#{veiculoController.veiculo.placa}" mask="aaa-9999" required="true" />
+                    <h:outputText value="Renavam:* " /><p:inputMask id="renavam" value="#{veiculoController.veiculo.renavam}" mask="(99_9999999" required="true" />
+                    <h:outputText value="Marca:* " /><h:inputText id="marca" value="#{veiculoController.veiculo.marca}" required="true" />
+                    <h:outputText value="Modelo:* " /><h:inputText id="modelo" value="#{veiculoController.veiculo.modelo}" required="true" />
+                    <h:outputText value="Cor:* " /><h:inputText id="cor" value="#{veiculoController.veiculo.cor}" required="true" />
+                    <h:outputText value="Ano:* " /><p:inputMask id="ano" value="#{veiculoController.veiculo.ano}" mask="9999" required="true" />
+                    <h:outputText value="Tipo: " />
+                        <h:selectOneMenu id="tipo" 
+                                        value="#{veiculoController.tipoSelecionado}" 
+                                        converter="TipoVeiculoConverter">
+                            <f:selectItems value="#{tipoVeiculoController.tipos}" var="tipo" itemLabel="#{tipo.descricao}" />
+                        </h:selectOneMenu>
+                    <h:outputText value="Capacidade Passageiros:* " /><h:inputText id="passageiros" value="#{veiculoController.veiculo.capacidadePassageiros}" required="true" />
+                    <h:outputText value="Capacidade Carga:* " /><h:inputText id="carga" value="#{veiculoController.veiculo.capacidadeCarga}" required="true" />
+                        
+                </h:panelGrid>
+                
+                <h:panelGrid columns="2" cellpadding="5" >
+                    <ui:repeat value="#{opcionaisVeiculoController.opcionais}" var="opcional" varStatus="i" >
+                        <h:panelGrid columns="2" cellpadding="5" >
+                            <h:outputText value="#{opcional.descricao}" /><h:selectBooleanCheckbox  value="#{veiculoController.checked[opcional.id]}" />
+                        </h:panelGrid>
+                    </ui:repeat>
+                </h:panelGrid>
+                
+                <h:commandButton class="btn" value="Cancelar" action="listaVeiculo" />
+                <h:commandButton class="btn" value="Salvar" action="#{veiculoController.salvar()}" />
+                
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

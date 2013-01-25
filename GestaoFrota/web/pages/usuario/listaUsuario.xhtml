@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../template.xhtml">
+
+            <ui:define name="conteudo">
+
+                <h:form>  
+
+                    <p:dataTable id="dataTable" var="usuario" value="#{usuarioController.usuarios}" 
+                                 paginator="true" >  
+                        <f:facet name="header">  
+                            Usuários Cadastrados  
+                        </f:facet>  
+
+                        <p:column sortBy="#{usuario.nome}" headerText="Nome">  
+                            <h:outputText value="#{usuario.nome}" />
+                            <h:inputHidden value="#{usuario.id}" />
+                        </p:column>  
+
+                        <p:column sortBy="#{usuario.login}" headerText="Login">  
+                            <h:outputText value="#{usuario.login}" />  
+                        </p:column>  
+
+                        <p:column sortBy="#{usuario.email}" headerText="Email">  
+                            <h:outputText value="#{usuario.email}" />  
+                        </p:column>  
+
+                        <p:column sortBy="#{usuario.tipoUsuario.descricao}" headerText="Tipo">  
+                            <h:outputText value="#{usuario.tipoUsuario.descricao}" />  
+                        </p:column>  
+
+                    </p:dataTable>  
+                    
+                    <h:commandButton value="Novo" action="#{usuarioController.cadastrar()}" />
+                    <h:commandButton value="Mostrar" action="detalhe" />
+                    <h:commandButton value="Editar" action="formulario" />
+                    <h:commandButton value="Deletar" action="#{usuarioController.remover()}" />
+
+                </h:form>   
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

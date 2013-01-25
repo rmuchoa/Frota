@@ -111,12 +111,6 @@ public class VeiculoController implements Serializable {
             }
         }
     }
-    
-    public Integer getParam() {
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-        return Integer.getInteger(request.getParameter("id"));
-    }
 
     /**
      * @return the veiculo

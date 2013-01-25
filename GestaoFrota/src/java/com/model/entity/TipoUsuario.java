@@ -6,7 +6,6 @@ package com.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -14,29 +13,24 @@ import javax.validation.constraints.Size;
  * @author renanmarceluchoa
  */
 @Entity
-@Table(name = "tipo_veiculo")
+@Table(name = "tipo_usuario")
 @NamedQueries({
-    @NamedQuery(name = "TipoVeiculo.findAll", query = "SELECT t FROM TipoVeiculo t"),
-    @NamedQuery(name = "TipoVeiculo.findById", query = "SELECT t FROM TipoVeiculo t WHERE t.id = :id"),
-    @NamedQuery(name = "TipoVeiculo.findByDescricao", query = "SELECT t FROM TipoVeiculo t WHERE t.descricao = :descricao")})
-public class TipoVeiculo implements Serializable {
+    @NamedQuery(name = "TipoUsuario.findAll", query = "SELECT t FROM TipoUsuario t"),
+    @NamedQuery(name = "TipoUsuario.findById", query = "SELECT t FROM TipoUsuario t WHERE t.id = :id"),
+    @NamedQuery(name = "TipoUsuario.findByDescricao", query = "SELECT t FROM TipoUsuario t WHERE t.descricao = :descricao")})
+public class TipoUsuario implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     private Integer id;
     private String descricao;
 
-    public TipoVeiculo() {
+    public TipoUsuario() {
         
     }
 
-    public TipoVeiculo(Integer id) {
+    public TipoUsuario(Integer id) {
         this.id = id;
-    }
-
-    public TipoVeiculo(Integer id, String descricao) {
-        this.id = id;
-        this.descricao = descricao;
     }
 
     @Id
@@ -50,9 +44,7 @@ public class TipoVeiculo implements Serializable {
         this.id = id;
     }
 
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
+    @Size(max = 255)
     @Column(name = "descricao")
     public String getDescricao() {
         return descricao;
@@ -72,10 +64,10 @@ public class TipoVeiculo implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TipoVeiculo)) {
+        if (!(object instanceof TipoUsuario)) {
             return false;
         }
-        TipoVeiculo other = (TipoVeiculo) object;
+        TipoUsuario other = (TipoUsuario) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -84,7 +76,7 @@ public class TipoVeiculo implements Serializable {
 
     @Override
     public String toString() {
-        return "com.model.entity.TipoVeiculo[ id=" + id + " ]";
+        return "com.model.entity.TipoUsuario[ id=" + id + " ]";
     }
     
 }

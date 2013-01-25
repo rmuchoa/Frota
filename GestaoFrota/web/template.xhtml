@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -15,7 +16,7 @@
         <title>Facelets Template</title>
     </h:head>
 
-    <h:body class="offset1 span10 offset1">
+    <h:body class="offset1 span11 offset1">
 
         <div id="top">
             <ui:insert name="top">
@@ -41,25 +42,28 @@
                 </div>
 
             </ui:insert>
+            
         </div>
 
         <div id="left" class="center_content">
             <ui:insert name="menu">
                  <div style="" id="menu" class="span3">
-                    <a style="width: 90%" class="btn" href="/GestaoFrota/pages/usuario/listaVeiculo.jsf"><img src="/GestaoFrota/imagens/html/plus_add_green.png" />Veiculo</a>
-                    <a style="width: 90%" class="btn" href=""><img src="/GestaoFrota/imagens/html/preferences-contact-list.png"/>Usuarios</a>
+                    <a style="width: 90%" class="btn" href="/GestaoFrota/pages/veiculo/listaVeiculo.jsf"><img src="/GestaoFrota/imagens/html/plus_add_green.png" />Veiculo</a>
+                    <a style="width: 90%" class="btn" href="/GestaoFrota/pages/usuario/listaUsuario.jsf"><img src="/GestaoFrota/imagens/html/preferences-contact-list.png"/>Usuarios</a>
                 </div>
             </ui:insert>
         </div>
         
         <div class="span6">
         <div id="content" class="center_content">
+            <f:view>
             <ui:insert name="conteudo">
                 <div>
                     <h1>Template</h1>
                     <p>asdiglabaluanlunua</p>
                 </div>
             </ui:insert>
+            </f:view>
         </div>
         </div>
 
