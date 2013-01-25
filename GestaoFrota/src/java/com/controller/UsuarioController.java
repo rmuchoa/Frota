@@ -49,6 +49,7 @@ public class UsuarioController implements Serializable {
     private List<TipoUsuario> tipos;
     private List<Cidade> cidades;
     private List<Estado> estados;
+    
     private Estado selectedEstado;
     
     private static Logger logger = Logger.getLogger(UsuarioController.class.getName());  
