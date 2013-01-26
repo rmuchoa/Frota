@@ -6,13 +6,13 @@ package com.model.dao;
 
 import com.model.entity.OpcionaisVeiculo;
 import java.util.List;
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 /**
  *
  * @author renanmarceluchoa
  */
-@Remote
+@Local
 public interface OpcionaisVeiculoDao {
     
     public List<OpcionaisVeiculo> listar();

@@ -6,13 +6,13 @@ package com.model.dao;
 
 import com.model.entity.Usuario;
 import java.util.List;
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 /**
  *
  * @author renanmarceluchoa
  */
-@Remote
+@Local
 public interface UsuarioDao {
     
     public void inserir(Usuario usuario);

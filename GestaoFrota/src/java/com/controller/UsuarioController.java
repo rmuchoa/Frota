@@ -22,6 +22,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import org.primefaces.event.FlowEvent;
 
 /**
@@ -65,13 +66,10 @@ public class UsuarioController implements Serializable {
         this.tipos = tipo.listar();
         this.cidades = new ArrayList<Cidade>();
         this.estados = estado.listar();
-        System.out.println(usuarios.size());
     }
     
     public String add() {
         this.usuario = new Usuario();
-        //this.usuario.setCidade(model.buscarCidade(new Integer(1)));
-        //this.usuario.setTipoUsuario(model.buscarTipoUsuario(new Integer(1)));
         return "formulario";
     }
     
@@ -111,7 +109,7 @@ public class UsuarioController implements Serializable {
         return "listaUsuario";
     }
     
-    public void updateCities() {
+    public void updateCities(AjaxBehaviorEvent event) {
         if (selectedEstado != null) {
             cidades = cidade.listarByEstado(selectedEstado);
         } else {

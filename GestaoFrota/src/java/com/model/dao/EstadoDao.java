@@ -6,13 +6,13 @@ package com.model.dao;
 
 import com.model.entity.Estado;
 import java.util.List;
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 /**
  *
  * @author renanmarceluchoa
  */
-@Remote
+@Local
 public interface EstadoDao {
     
     public Estado buscar(Integer id);

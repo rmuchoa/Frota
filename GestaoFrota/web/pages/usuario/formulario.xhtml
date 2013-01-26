@@ -14,10 +14,11 @@
 
                 <h:form>  
 
-                    <p:wizard widgetVar="wiz" backLabel="Voltar" nextLabel="Avançar"
-                              flowListener="#{usuarioController.onFlowProcess}">  
+                    <p:panel header="Cadastro de Usuário">
+<!--                    <p:wizard widgetVar="wiz" backLabel="Voltar" nextLabel="Avançar"
+                              flowListener="">  
 
-                        <p:tab id="pessoal" title="Pessoal">  
+                        <p:tab id="pessoal" title="Pessoal">  -->
 
                             <p:panel header="Usuário">  
 
@@ -32,6 +33,17 @@
 
                                     <h:outputText value="Senha: " />  
                                     <h:inputSecret value="#{usuarioController.usuario.senha}" />  
+                                    
+                                    <h:outputText value="Tipo: " />  
+                                    <h:selectOneMenu id="tipos" 
+                                                     converter="TipoUsuarioConverter"
+                                                     value="#{usuarioController.usuario.tipoUsuario}">
+<!--                                        <f:selectItem itemLabel=" - " value="null" />-->
+                                        <f:selectItems var="tipo"
+                                                       itemLabel="#{tipo.descricao}"
+                                                       value="#{usuarioController.tipos}" />
+                                    </h:selectOneMenu>
+                                    
                                 </h:panelGrid>  
                             </p:panel>  
                             
@@ -41,10 +53,10 @@
 
                                 <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">  
                                     <h:outputText value="Fone: " />  
-                                    <p:inputText value="#{usuarioController.usuario.telefone}" />  
+                                    <p:inputMask mask="(99) 9999-9999" value="#{usuarioController.usuario.telefone}" />  
 
                                     <h:outputText value="Celular: " />  
-                                    <p:inputText value="#{usuarioController.usuario.celular}" />  
+                                    <p:inputMask mask="(99) 9999-9999" value="#{usuarioController.usuario.celular}" />  
 
                                     <h:outputText value="Email: " />  
                                     <p:inputText value="#{usuarioController.usuario.email}" />  
@@ -54,9 +66,45 @@
                                 </h:panelGrid>  
                             </p:panel>  
                             
-                        </p:tab>  
+<!--                        </p:tab>  
+                        
+                        <p:tab id="registro" title="Registro">  -->
 
-                        <p:tab id="endereco" title="Endereço">  
+                            <p:panel header="Registro">  
+
+                                <h:messages errorClass="error"/>  
+
+                                <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">  
+                                    <h:outputText value="RG: " />  
+                                    <p:inputText value="#{usuarioController.usuario.rg}" />  
+                                
+                                    <h:outputText value="Siape: " />  
+                                    <p:inputText value="#{usuarioController.usuario.siape}" />  
+                                </h:panelGrid>  
+                            </p:panel>  
+                            
+                            <p:panel header="Habilitação">  
+
+                                <h:messages errorClass="error"/>  
+
+                                <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">  
+                                    <h:outputText value="Numero: " />  
+                                    <p:inputText value="#{usuarioController.usuario.numeroCnh}" />  
+
+                                    <h:outputText value="Validade: " />  
+                                    <p:calendar value="#{usuarioController.usuario.validadeCnh}" />  
+
+                                    <h:outputText value="Categoria: " />  
+                                    <p:inputText value="#{usuarioController.usuario.categoriaCnh}" />  
+
+                                    <h:outputText value="Pular para última: " />  
+                                    <h:selectBooleanCheckbox value="#{usuarioController.skip}" />  
+                                </h:panelGrid>  
+                            </p:panel>  
+                            
+<!--                        </p:tab>  
+
+                        <p:tab id="endereco" title="Endereço">  -->
 
                             <p:panel header="Endereço">  
 
@@ -76,88 +124,47 @@
                                     <p:inputText value="#{usuarioController.usuario.cep}" />
 
                                     <h:outputText value="Estado: " />  
-                                    <p:selectOneMenu id="estados" 
+                                    <h:selectOneMenu id="estados" 
                                                      converter="EstadoConverter"
                                                      value="#{usuarioController.selectedEstado}">
-<!--                                        <f:selectItem itemLabel=" - " value="" />-->
+<!--                                        <f:selectItem itemLabel=" - " value="null" />-->
                                         <f:selectItems var="estado" 
                                                        itemLabel="#{estado.sigla}" 
                                                        itemDescription="#{estado.nome}" 
                                                        value="#{usuarioController.estados}" />
-                                        <p:ajax update="cidades" 
-                                                listener="#{usuarioController.updateCities()}" />
-                                    </p:selectOneMenu>
+                                        <f:ajax render="cidades" event="change"
+                                                listener="#{usuarioController.updateCities}" />
+                                    </h:selectOneMenu>
                                     
                                     <h:outputText value="Cidade: " />  
-                                    <p:selectOneMenu id="cidades" 
+                                    <h:selectOneMenu id="cidades" 
                                                      converter="CidadeConverter"
                                                      value="#{usuarioController.usuario.cidade}">
-<!--                                        <f:selectItem itemLabel=" - " value="" />-->
+<!--                                        <f:selectItem itemLabel=" - " value="null" />-->
                                         <f:selectItems var="cidade"
                                                        itemLabel="#{cidade.nome}"
                                                        value="#{usuarioController.cidades}" />
-                                    </p:selectOneMenu>
+                                    </h:selectOneMenu>
                                     
                                     <h:outputText value="Pular para última: " />  
                                     <h:selectBooleanCheckbox value="#{usuarioController.skip}" />  
                                 </h:panelGrid>  
                             </p:panel>  
                             
-                        </p:tab>  
+<!--                        </p:tab>  
 
-                        <p:tab id="confirm" title="Confirmation">  
-                            <p:panel header="Confirmation">  
+                        <p:tab id="confirm" title="Confirmation">  -->
+                            
+<!--                        </p:tab>  
 
-                                <h:panelGrid id="confirmation" columns="4">  
-                                    <h:outputText value="Nome: " />  
-                                    <h:outputText styleClass="outputLabel"  
-                                                  value="#{usuarioController.usuario.nome}" />  
-
-                                    <h:outputText value="Login: " />  
-                                    <h:outputText  styleClass="outputLabel"  
-                                                   value="#{usuarioController.usuario.login}"/>  
-
-                                    <h:outputText value="Senha: " />  
-                                    <h:outputText styleClass="outputLabel"  
-                                                  value="#{usuarioController.usuario.senha}" />  
-
-                                    <h:outputText value="Telefone: " />  
-                                    <h:outputText styleClass="outputLabel"  
-                                                  value="#{usuarioController.usuario.telefone}" />  
-
-                                    <h:outputText value="Celular: " />  
-                                    <h:outputText styleClass="outputLabel"  
-                                                  value="#{usuarioController.usuario.celular}" />  
-
-                                    <h:outputText value="Email: " />  
-                                    <h:outputText styleClass="outputLabel"  
-                                                  value="#{usuarioController.usuario.email}" />   
-
-                                    <h:outputText value="Rua: " />  
-                                    <h:outputText styleClass="outputLabel"  
-                                                  value="#{usuarioController.usuario.rua}" />   
-
-                                    <h:outputText value="Número: " />  
-                                    <h:outputText styleClass="outputLabel"  
-                                                  value="#{usuarioController.usuario.numero}" />   
-
-                                    <h:outputText value="Complemento: " />  
-                                    <h:outputText styleClass="outputLabel"  
-                                                  value="#{usuarioController.usuario.complemento}" />   
-
-                                    <h:outputText value="CEP: " />  
-                                    <h:outputText styleClass="outputLabel"  
-                                                  value="#{usuarioController.usuario.cep}" />   
-                                </h:panelGrid>  
-                                
-                                <h:panelGrid columns="2" cellpadding="5" >
-                                    <p:button value="Cadastrar" outcome ="listaUsuario"/>  
+                    </p:wizard>  -->
+                        <f:facet name="footer">
+                            <h:panelGrid columns="3" cellpadding="5" >
+                                    <p:button value="Voltar" outcome ="listaUsuario"/>  
                                     <p:button value="Cadastrar" outcome ="#{usuarioController.save()}"/>  
                                 </h:panelGrid>
-                            </p:panel>  
-                        </p:tab>  
-
-                    </p:wizard>  
+                        </f:facet>
+                    </p:panel>
 
                 </h:form>  
 

@@ -6,13 +6,13 @@ package com.model.dao;
 
 import com.model.entity.TipoUsuario;
 import java.util.List;
-import javax.ejb.Remote;
+import javax.ejb.Local;
 
 /**
  *
  * @author renanmarceluchoa
  */
-@Remote
+@Local
 public interface TipoUsuarioDao {
     
     public TipoUsuario buscar(Integer id);
